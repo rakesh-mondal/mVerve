@@ -8,11 +8,14 @@ import {
 
 /* ─── Page Content Imports ─── */
 import { HomepageContent } from "./pages/mverve-home-thoughtworks";
-import { AILabHubContent, GenAIContent } from "./pages/mverve-ailab-wireframe";
-import { ExpertiseHubContent, CloudNativeContent } from "./pages/mverve-expertise-wireframe";
-import { ManufacturingContent } from "./pages/mverve-industry-wireframe";
-import { TechRadarContent } from "./pages/mverve-techradar-wireframe";
-import { ContactContent } from "./pages/mverve-contact-wireframe";
+import { ContactContent } from "./pages/mverve-contact-tw";
+import { CareersContent } from "./pages/mverve-careers-tw";
+import { AILabHubContent } from "./pages/mverve-ailab-tw";
+import { GenAIContent } from "./pages/mverve-genai-tw";
+import { ExpertiseHubContent } from "./pages/mverve-expertise-tw";
+import { CloudNativeContent } from "./pages/mverve-cloud-native-tw";
+import { ManufacturingContent } from "./pages/mverve-manufacturing-tw";
+import { TechRadarContent } from "./pages/mverve-techradar-tw";
 
 /* ═══════════════════════════════════════════
    SHARED TOKENS
@@ -45,14 +48,15 @@ function useWindowSize() {
    ROUTE DEFINITIONS
    ═══════════════════════════════════════════ */
 const ROUTES = [
-  { id: "home", hash: "", label: "Homepage", shortLabel: "Home", icon: Home, color: T.blue, Component: HomepageContent },
-  { id: "ai-lab", hash: "ai-lab", label: "AI & Innovation Lab", shortLabel: "AI Lab", icon: Brain, color: T.cyan, Component: AILabHubContent },
-  { id: "genai", hash: "genai", label: "Generative AI Solutions", shortLabel: "GenAI", icon: Sparkles, color: T.cyan, Component: GenAIContent, indent: true },
-  { id: "expertise", hash: "expertise", label: "Expertise Hub", shortLabel: "Expertise", icon: Layers, color: T.blue, Component: ExpertiseHubContent },
-  { id: "cloud-native", hash: "cloud-native", label: "Cloud-Native Engineering", shortLabel: "Cloud-Native", icon: Cloud, color: T.blue, Component: CloudNativeContent, indent: true },
-  { id: "manufacturing", hash: "manufacturing", label: "Manufacturing & Industry 4.0", shortLabel: "Manufacturing", icon: Factory, color: T.amber, Component: ManufacturingContent },
-  { id: "tech-radar", hash: "tech-radar", label: "mVerve Tech Radar", shortLabel: "Tech Radar", icon: Radar, color: T.cyan, Component: TechRadarContent },
-  { id: "contact", hash: "contact", label: "Let's Innovate (Contact)", shortLabel: "Contact", icon: Send, color: T.green, Component: ContactContent },
+  { id: "home", hash: "", label: "Homepage", shortLabel: "Home", icon: Home, color: T.blue, Component: HomepageContent, selfShell: true },
+  { id: "ai-lab", hash: "ai-lab", label: "AI & Innovation Lab", shortLabel: "AI Lab", icon: Brain, color: T.cyan, Component: AILabHubContent, selfShell: true },
+  { id: "genai", hash: "genai", label: "Generative AI Solutions", shortLabel: "GenAI", icon: Sparkles, color: T.cyan, Component: GenAIContent, indent: true, selfShell: true },
+  { id: "expertise", hash: "expertise", label: "Expertise Hub", shortLabel: "Expertise", icon: Layers, color: T.blue, Component: ExpertiseHubContent, selfShell: true },
+  { id: "cloud-native", hash: "cloud-native", label: "Cloud-Native Engineering", shortLabel: "Cloud-Native", icon: Cloud, color: T.blue, Component: CloudNativeContent, indent: true, selfShell: true },
+  { id: "manufacturing", hash: "manufacturing", label: "Manufacturing & Industry 4.0", shortLabel: "Manufacturing", icon: Factory, color: T.amber, Component: ManufacturingContent, selfShell: true },
+  { id: "tech-radar", hash: "tech-radar", label: "mVerve Tech Radar", shortLabel: "Tech Radar", icon: Radar, color: T.cyan, Component: TechRadarContent, selfShell: true },
+  { id: "contact", hash: "contact", label: "Let's Innovate (Contact)", shortLabel: "Contact", icon: Send, color: T.green, Component: ContactContent, selfShell: true },
+  { id: "careers", hash: "careers", label: "Careers", shortLabel: "Careers", icon: Sparkles, color: T.blue, Component: CareersContent, selfShell: true },
 ];
 
 /* ═══════════════════════════════════════════
@@ -560,8 +564,8 @@ export default function MVervePrototype() {
   const isMobile = w < MOBILE_BREAKPOINT;
   const mainPaddingBottom = isMobile ? 88 : 0;
 
-  // Home route uses its own self-contained shell (Thoughtworks-style cream design).
-  if (route.id === "home") {
+  // Pages with their own Thoughtworks-style shell render standalone.
+  if (route.selfShell) {
     return <PageComponent navigate={navigate} />;
   }
 
