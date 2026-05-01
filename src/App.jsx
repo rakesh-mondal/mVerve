@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 
 /* ─── Page Content Imports ─── */
-import { HomepageContent } from "./pages/mverve-homepage-wireframe";
+import { HomepageContent } from "./pages/mverve-home-thoughtworks";
 import { AILabHubContent, GenAIContent } from "./pages/mverve-ailab-wireframe";
 import { ExpertiseHubContent, CloudNativeContent } from "./pages/mverve-expertise-wireframe";
 import { ManufacturingContent } from "./pages/mverve-industry-wireframe";
@@ -559,6 +559,11 @@ export default function MVervePrototype() {
   const w = useWindowSize();
   const isMobile = w < MOBILE_BREAKPOINT;
   const mainPaddingBottom = isMobile ? 88 : 0;
+
+  // Home route uses its own self-contained shell (Thoughtworks-style cream design).
+  if (route.id === "home") {
+    return <PageComponent navigate={navigate} />;
+  }
 
   return (
     <div style={{
