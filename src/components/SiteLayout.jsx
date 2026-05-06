@@ -153,6 +153,14 @@ export function TopBar({ navigate }) {
             <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </button>
           <button
+            onClick={() => go("contact")}
+            aria-label="Let's talk"
+            className="sm:hidden inline-flex items-center gap-1.5 px-3 py-2 bg-ink text-cream text-[13px] font-medium tracking-tight hover:bg-coral transition-colors"
+          >
+            Let's talk
+            <ArrowUpRight size={14} />
+          </button>
+          <button
             type="button"
             className="xl:hidden relative w-11 h-11 -mr-2 flex flex-col items-center justify-center gap-1.5 text-ink z-[110]"
             onClick={() => setMobileOpen((v) => !v)}
