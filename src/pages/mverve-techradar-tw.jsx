@@ -92,6 +92,79 @@ function Legend() {
   );
 }
 
+function RadarPlot() {
+  const RADII = { Adopt: 70, Trial: 130, Assess: 190, Hold: 240 };
+  const QUAD_ANGLES = {
+    "Languages & Frameworks": { from: 180, to: 270 },
+    "Platforms": { from: 270, to: 360 },
+    "Tools": { from: 0, to: 90 },
+    "AI & Data": { from: 90, to: 180 },
+  };
+  const COLOR = { Adopt: "#CF4520", Trial: "#0E1116", Assess: "#0E1116", Hold: "#94A3B8" };
+  const cx = 320, cy = 320;
+
+  // distribute blips by quadrant + ring with deterministic angular jitter
+  const placements = BLIPS.map((b, i) => {
+    const range = QUAD_ANGLES[b.q];
+    const blipsInSlot = BLIPS.filter((x) => x.q === b.q && x.ring === b.ring);
+    const idx = blipsInSlot.indexOf(b);
+    const span = range.to - range.from;
+    const step = span / (blipsInSlot.length + 1);
+    const angle = range.from + step * (idx + 1);
+    const r = RADII[b.ring] - 12;
+    const rad = (angle * Math.PI) / 180;
+    return { ...b, x: cx + Math.cos(rad) * r, y: cy + Math.sin(rad) * r };
+  });
+
+  return (
+    <section className="px-6 lg:px-10 py-20 lg:py-28">
+      <div className="max-w-[1440px] mx-auto">
+        <div className="grid grid-cols-12 gap-6 mb-10">
+          <div className="col-span-12 lg:col-span-7">
+            <div className="font-mono text-[10px] tracking-[0.2em] uppercase text-coral mb-6">The radar, visualised</div>
+            <h2 className="font-display text-[clamp(36px,4.5vw,68px)] leading-[1] tracking-[-0.02em] font-light text-ink">
+              Twenty-six blips. <span className="italic">One picture.</span>
+            </h2>
+          </div>
+        </div>
+
+        <figure className="relative bg-paper border border-ink/15 p-6 lg:p-12">
+          <svg viewBox="0 0 640 640" className="w-full h-auto max-w-[820px] mx-auto block" role="img" aria-label="Tech Radar plot">
+            {/* Rings */}
+            {Object.entries(RADII).map(([ring, r]) => (
+              <g key={ring}>
+                <circle cx={cx} cy={cy} r={r} fill="none" stroke="#0E1116" strokeWidth="1" opacity={ring === "Adopt" ? 0.4 : 0.18} />
+                <text x={cx + r - 4} y={cy + 4} fontFamily="ui-monospace, monospace" fontSize="10" letterSpacing="2" fill="#0E1116" opacity="0.55" textAnchor="end">
+                  {ring.toUpperCase()}
+                </text>
+              </g>
+            ))}
+            {/* Quadrant lines */}
+            <line x1={cx - 260} y1={cy} x2={cx + 260} y2={cy} stroke="#0E1116" strokeWidth="1" opacity="0.2" />
+            <line x1={cx} y1={cy - 260} x2={cx} y2={cy + 260} stroke="#0E1116" strokeWidth="1" opacity="0.2" />
+            {/* Quadrant labels */}
+            <text x={cx - 250} y={cy - 250} fontFamily="ui-monospace, monospace" fontSize="11" letterSpacing="2" fill="#CF4520">LANGUAGES & FRAMEWORKS</text>
+            <text x={cx + 250} y={cy - 250} fontFamily="ui-monospace, monospace" fontSize="11" letterSpacing="2" fill="#CF4520" textAnchor="end">PLATFORMS</text>
+            <text x={cx + 250} y={cy + 260} fontFamily="ui-monospace, monospace" fontSize="11" letterSpacing="2" fill="#CF4520" textAnchor="end">TOOLS</text>
+            <text x={cx - 250} y={cy + 260} fontFamily="ui-monospace, monospace" fontSize="11" letterSpacing="2" fill="#CF4520">AI & DATA</text>
+
+            {/* Blips */}
+            {placements.map((b, i) => (
+              <g key={b.n}>
+                <circle cx={b.x} cy={b.y} r="6" fill={COLOR[b.ring]} opacity={b.ring === "Hold" ? 0.5 : 1} />
+                <text x={b.x + 9} y={b.y + 4} fontFamily="ui-monospace, monospace" fontSize="9" fill="#0E1116" opacity="0.85">{b.n}</text>
+              </g>
+            ))}
+          </svg>
+          <figcaption className="font-mono text-[10px] tracking-[0.2em] uppercase text-ink-muted mt-6 text-center">
+            Fig. 03 · mVerve Tech Radar · Q1 2026
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+  );
+}
+
 function RadarTable() {
   const [filter, setFilter] = useState("All");
   const filters = ["All", ...RINGS];
@@ -205,6 +278,7 @@ export function TechRadarContent({ navigate }) {
     <PageShell navigate={navigate}>
       <Hero />
       <Legend />
+      <RadarPlot />
       <RadarTable />
       <Editorial />
     </PageShell>

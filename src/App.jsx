@@ -3,7 +3,9 @@ import { motion, useInView, AnimatePresence } from "framer-motion";
 import {
   ArrowRight, ChevronDown, Menu, X, Sparkles, Brain, Factory,
   Cloud, Layers, Radar, Send, Home, Zap, Code2, MapPin,
-  ChevronRight, ExternalLink, Compass, PanelRightOpen, PanelRightClose
+  ChevronRight, ExternalLink, Compass, PanelRightOpen, PanelRightClose,
+  Leaf, Rocket, Database, RefreshCw, Server, Monitor, Target,
+  GitBranch, Users, HeartPulse, Award, FileText
 } from "lucide-react";
 
 /* ─── Page Content Imports ─── */
@@ -16,6 +18,21 @@ import { ExpertiseHubContent } from "./pages/mverve-expertise-tw";
 import { CloudNativeContent } from "./pages/mverve-cloud-native-tw";
 import { ManufacturingContent } from "./pages/mverve-manufacturing-tw";
 import { TechRadarContent } from "./pages/mverve-techradar-tw";
+import { AutomationContent } from "./pages/mverve-automation-tw";
+import { GreenOpsContent } from "./pages/mverve-greenops-tw";
+import { MVPIncubatorContent } from "./pages/mverve-mvp-incubator-tw";
+import { DataStrategyContent } from "./pages/mverve-data-strategy-tw";
+import { ModernizationContent } from "./pages/mverve-modernization-tw";
+import { PlatformContent } from "./pages/mverve-platform-tw";
+import { ExperienceContent } from "./pages/mverve-experience-tw";
+import { ProductStrategyContent } from "./pages/mverve-product-strategy-tw";
+import { ServiceDesignContent } from "./pages/mverve-service-design-tw";
+import { AgilePodsContent } from "./pages/mverve-agile-pods-tw";
+import { ConsultingContent } from "./pages/mverve-consulting-tw";
+import { CleanTechContent } from "./pages/mverve-cleantech-tw";
+import { HealthcareContent } from "./pages/mverve-healthcare-tw";
+import { SuccessStoriesContent } from "./pages/mverve-success-stories-tw";
+import { WhitePapersContent } from "./pages/mverve-white-papers-tw";
 
 /* ═══════════════════════════════════════════
    SHARED TOKENS
@@ -49,12 +66,32 @@ function useWindowSize() {
    ═══════════════════════════════════════════ */
 const ROUTES = [
   { id: "home", hash: "", label: "Homepage", shortLabel: "Home", icon: Home, color: T.blue, Component: HomepageContent, selfShell: true },
+
   { id: "ai-lab", hash: "ai-lab", label: "AI & Innovation Lab", shortLabel: "AI Lab", icon: Brain, color: T.cyan, Component: AILabHubContent, selfShell: true },
   { id: "genai", hash: "genai", label: "Generative AI Solutions", shortLabel: "GenAI", icon: Sparkles, color: T.cyan, Component: GenAIContent, indent: true, selfShell: true },
+  { id: "automation", hash: "automation", label: "Intelligent Automation", shortLabel: "Automation", icon: Zap, color: T.cyan, Component: AutomationContent, indent: true, selfShell: true },
+  { id: "greenops", hash: "greenops", label: "Sustainable AI (GreenOps)", shortLabel: "GreenOps", icon: Leaf, color: T.green, Component: GreenOpsContent, indent: true, selfShell: true },
+  { id: "mvp-incubator", hash: "mvp-incubator", label: "The MVP Incubator", shortLabel: "MVP Incubator", icon: Rocket, color: T.cyan, Component: MVPIncubatorContent, indent: true, selfShell: true },
+  { id: "data-strategy", hash: "data-strategy", label: "Data Strategy & Engineering", shortLabel: "Data Strategy", icon: Database, color: T.cyan, Component: DataStrategyContent, indent: true, selfShell: true },
+
   { id: "expertise", hash: "expertise", label: "Expertise Hub", shortLabel: "Expertise", icon: Layers, color: T.blue, Component: ExpertiseHubContent, selfShell: true },
   { id: "cloud-native", hash: "cloud-native", label: "Cloud-Native Engineering", shortLabel: "Cloud-Native", icon: Cloud, color: T.blue, Component: CloudNativeContent, indent: true, selfShell: true },
+  { id: "modernization", hash: "modernization", label: "Enterprise Modernization", shortLabel: "Modernization", icon: RefreshCw, color: T.blue, Component: ModernizationContent, indent: true, selfShell: true },
+  { id: "platform", hash: "platform", label: "Platform Engineering", shortLabel: "Platform", icon: Server, color: T.blue, Component: PlatformContent, indent: true, selfShell: true },
+  { id: "experience", hash: "experience", label: "Digital Experience", shortLabel: "Experience", icon: Monitor, color: T.blue, Component: ExperienceContent, indent: true, selfShell: true },
+  { id: "product-strategy", hash: "product-strategy", label: "Product Strategy & Design", shortLabel: "Product Strategy", icon: Target, color: T.blue, Component: ProductStrategyContent, indent: true, selfShell: true },
+  { id: "service-design", hash: "service-design", label: "Service Design", shortLabel: "Service Design", icon: GitBranch, color: T.blue, Component: ServiceDesignContent, indent: true, selfShell: true },
+  { id: "agile-pods", hash: "agile-pods", label: "Agile Pods", shortLabel: "Agile Pods", icon: Users, color: T.blue, Component: AgilePodsContent, indent: true, selfShell: true },
+  { id: "consulting", hash: "consulting", label: "Technical Consulting", shortLabel: "Consulting", icon: Compass, color: T.blue, Component: ConsultingContent, indent: true, selfShell: true },
+
   { id: "manufacturing", hash: "manufacturing", label: "Manufacturing & Industry 4.0", shortLabel: "Manufacturing", icon: Factory, color: T.amber, Component: ManufacturingContent, selfShell: true },
+  { id: "cleantech", hash: "cleantech", label: "CleanTech & Sustainability", shortLabel: "CleanTech", icon: Leaf, color: T.green, Component: CleanTechContent, indent: true, selfShell: true },
+  { id: "healthcare", hash: "healthcare", label: "Healthcare & Life Sciences", shortLabel: "Healthcare", icon: HeartPulse, color: T.rose, Component: HealthcareContent, indent: true, selfShell: true },
+
   { id: "tech-radar", hash: "tech-radar", label: "mVerve Tech Radar", shortLabel: "Tech Radar", icon: Radar, color: T.cyan, Component: TechRadarContent, selfShell: true },
+  { id: "success-stories", hash: "success-stories", label: "Success Stories", shortLabel: "Success Stories", icon: Award, color: T.cyan, Component: SuccessStoriesContent, indent: true, selfShell: true },
+  { id: "white-papers", hash: "white-papers", label: "White Papers", shortLabel: "White Papers", icon: FileText, color: T.cyan, Component: WhitePapersContent, indent: true, selfShell: true },
+
   { id: "contact", hash: "contact", label: "Let's Innovate (Contact)", shortLabel: "Contact", icon: Send, color: T.green, Component: ContactContent, selfShell: true },
   { id: "careers", hash: "careers", label: "Careers", shortLabel: "Careers", icon: Sparkles, color: T.blue, Component: CareersContent, selfShell: true },
 ];

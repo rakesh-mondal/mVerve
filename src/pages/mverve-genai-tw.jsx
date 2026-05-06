@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { PageShell } from "../components/SiteLayout";
+import { HiggsfieldPlaceholder } from "../components/Visuals";
 
 const PROBLEMS = [
   { h: "Demos that don't survive contact with reality.", d: "Most enterprise GenAI pilots stall in production because they were built without eval, observability, or a clear owner for failure modes." },
@@ -123,12 +124,79 @@ function Methodology() {
   );
 }
 
+function GenAIDiagram() {
+  return (
+    <section className="px-6 lg:px-10 py-20 lg:py-28">
+      <div className="max-w-[1440px] mx-auto">
+        <div className="grid grid-cols-12 gap-6 mb-10">
+          <div className="col-span-12 lg:col-span-7">
+            <div className="font-mono text-[10px] tracking-[0.2em] uppercase text-coral mb-6">The system, drawn</div>
+            <h2 className="font-display text-[clamp(36px,4.5vw,68px)] leading-[1] tracking-[-0.02em] font-light text-ink">
+              What a real GenAI product <span className="italic">looks like.</span>
+            </h2>
+          </div>
+        </div>
+        <figure className="relative bg-paper border border-ink/15 p-6 lg:p-12 overflow-x-auto">
+          <svg viewBox="0 0 1280 460" className="w-full min-w-[900px] h-auto" role="img" aria-label="GenAI architecture diagram">
+            {/* User */}
+            <g transform="translate(40, 200)">
+              <rect x="0" y="0" width="140" height="60" fill="#0E1116" />
+              <text x="70" y="36" fontFamily="serif" fontStyle="italic" fontSize="18" fill="#F5F1EB" textAnchor="middle">User</text>
+            </g>
+            {/* Arrow user → app */}
+            <line x1="180" y1="230" x2="240" y2="230" stroke="#0E1116" strokeWidth="1" />
+            <polygon points="240,225 250,230 240,235" fill="#0E1116" />
+
+            {/* App layer */}
+            <rect x="250" y="190" width="180" height="80" fill="none" stroke="#0E1116" strokeWidth="1" />
+            <text x="340" y="216" fontFamily="ui-monospace, monospace" fontSize="11" letterSpacing="2" fill="#0E1116" textAnchor="middle" opacity="0.7">APPLICATION</text>
+            <text x="340" y="244" fontFamily="serif" fontStyle="italic" fontSize="18" fill="#0E1116" textAnchor="middle">UI · API</text>
+
+            {/* Arrow app → orchestrator */}
+            <line x1="430" y1="230" x2="490" y2="230" stroke="#0E1116" strokeWidth="1" />
+            <polygon points="490,225 500,230 490,235" fill="#0E1116" />
+
+            {/* Orchestrator (coral, central) */}
+            <rect x="500" y="160" width="280" height="140" fill="#CF4520" />
+            <text x="640" y="190" fontFamily="ui-monospace, monospace" fontSize="11" letterSpacing="2" fill="#F5F1EB" textAnchor="middle" opacity="0.85">ORCHESTRATOR</text>
+            <text x="640" y="220" fontFamily="serif" fontStyle="italic" fontSize="22" fill="#F5F1EB" textAnchor="middle">RAG · Agents · Tools</text>
+            <text x="640" y="252" fontFamily="ui-monospace, monospace" fontSize="10" letterSpacing="2" fill="#F5F1EB" textAnchor="middle" opacity="0.75">VIA · MCP</text>
+            <text x="640" y="280" fontFamily="ui-monospace, monospace" fontSize="10" letterSpacing="2" fill="#F5F1EB" textAnchor="middle" opacity="0.7">HUMAN-IN-LOOP ESCAPE</text>
+
+            {/* Arrows orchestrator → backends */}
+            {[
+              { x: 880, y: 80, label: "Foundation Models", sub: "Claude · Llama · GPT" },
+              { x: 880, y: 200, label: "Retrieval", sub: "Vector · Lexical · Graph" },
+              { x: 880, y: 320, label: "Tools", sub: "Custom · 3rd party" },
+            ].map((b, i) => (
+              <g key={i}>
+                <line x1="780" y1="230" x2={b.x} y2={b.y + 40} stroke="#0E1116" strokeWidth="1" opacity="0.6" />
+                <rect x={b.x} y={b.y} width="240" height="80" fill="none" stroke="#0E1116" strokeWidth="1" />
+                <text x={b.x + 120} y={b.y + 26} fontFamily="ui-monospace, monospace" fontSize="11" letterSpacing="2" fill="#0E1116" textAnchor="middle" opacity="0.7">{b.label.toUpperCase()}</text>
+                <text x={b.x + 120} y={b.y + 54} fontFamily="serif" fontStyle="italic" fontSize="16" fill="#0E1116" textAnchor="middle">{b.sub}</text>
+              </g>
+            ))}
+
+            {/* Eval / observability rail under orchestrator */}
+            <rect x="40" y="380" width="1200" height="48" fill="none" stroke="#CF4520" strokeWidth="1.5" strokeDasharray="6 4" />
+            <text x="640" y="410" fontFamily="ui-monospace, monospace" fontSize="11" letterSpacing="3" fill="#CF4520" textAnchor="middle">EVAL · OBSERVABILITY · COST CONTROLS · GUARDRAILS</text>
+          </svg>
+          <figcaption className="font-mono text-[10px] tracking-[0.2em] uppercase text-ink-muted mt-6">
+            Fig. 04 · GenAI reference architecture
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+  );
+}
+
 export function GenAIContent({ navigate }) {
   return (
     <PageShell navigate={navigate}>
       <Hero />
       <Problem />
       <Capabilities />
+      <GenAIDiagram />
       <Methodology />
     </PageShell>
   );

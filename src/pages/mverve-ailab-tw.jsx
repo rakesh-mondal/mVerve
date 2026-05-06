@@ -1,12 +1,13 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { PageShell } from "../components/SiteLayout";
+import { HiggsfieldPlaceholder } from "../components/Visuals";
 
 const CAPABILITIES = [
   { tag: "Generative AI", t: "Custom LLMs & Agents", d: "Domain-tuned models, retrieval pipelines, and agentic workflows for the messy realities of industrial operations.", route: "genai" },
-  { tag: "Automation", t: "Intelligent Automation", d: "Process intelligence + ML to automate the work spreadsheets and ticketing systems can't.", route: "ai-lab" },
-  { tag: "GreenOps", t: "Sustainable AI", d: "Carbon-aware training, inference, and infrastructure. Lower emissions and lower bills, by design.", route: "ai-lab" },
-  { tag: "Data", t: "Data Strategy & Engineering", d: "The unglamorous, foundational work that makes any of the above actually viable in production.", route: "ai-lab" },
+  { tag: "Automation", t: "Intelligent Automation", d: "Process intelligence + ML to automate the work spreadsheets and ticketing systems can't.", route: "automation" },
+  { tag: "GreenOps", t: "Sustainable AI", d: "Carbon-aware training, inference, and infrastructure. Lower emissions and lower bills, by design.", route: "greenops" },
+  { tag: "Data", t: "Data Strategy & Engineering", d: "The unglamorous, foundational work that makes any of the above actually viable in production.", route: "data-strategy" },
 ];
 
 const PRINCIPLES = [
@@ -171,10 +172,26 @@ function Stack() {
   );
 }
 
+function LabShot() {
+  return (
+    <section className="px-0 lg:px-10 pb-4">
+      <div className="max-w-[1440px] mx-auto">
+        <HiggsfieldPlaceholder
+          kind="animation"
+          aspect="21/9"
+          brief="Slow push through an AI research lab — long table, multiple monitors with token streams visible, whiteboard with hand-drawn architecture, single overhead pendant. Coral glow on a single GPU rack at the back."
+          caption="The Lab · R&D bench"
+        />
+      </div>
+    </section>
+  );
+}
+
 export function AILabHubContent({ navigate }) {
   return (
     <PageShell navigate={navigate}>
       <Hero />
+      <LabShot />
       <Capabilities navigate={navigate} />
       <Principles />
       <FeaturedCase />

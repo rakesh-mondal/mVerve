@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { PageShell } from "../components/SiteLayout";
+import { HiggsfieldPlaceholder } from "../components/Visuals";
 
 const OUTCOMES = [
   { v: "$2M+", l: "Annual infrastructure savings per engagement" },
@@ -149,11 +150,78 @@ function Stack() {
   );
 }
 
+function ArchitectureStack() {
+  const layers = [
+    { t: "PRODUCT TEAMS", n: "Apps · APIs · Frontends", color: "#0E1116" },
+    { t: "PLATFORM", n: "IDP · Templates · Golden paths", color: "#CF4520" },
+    { t: "RUNTIME", n: "Kubernetes · Lambda · Cloud Run", color: "#0E1116" },
+    { t: "DATA", n: "Postgres · Snowflake · Kafka", color: "#0E1116" },
+    { t: "CLOUD", n: "AWS · GCP · Azure", color: "#0E1116" },
+  ];
+  return (
+    <section className="px-6 lg:px-10 py-20 lg:py-28">
+      <div className="max-w-[1440px] mx-auto">
+        <div className="grid grid-cols-12 gap-6 mb-10">
+          <div className="col-span-12 lg:col-span-7">
+            <div className="font-mono text-[10px] tracking-[0.2em] uppercase text-coral mb-6">The reference stack</div>
+            <h2 className="font-display text-[clamp(36px,4.5vw,68px)] leading-[1] tracking-[-0.02em] font-light text-ink">
+              Five layers. <span className="italic">One contract each.</span>
+            </h2>
+          </div>
+        </div>
+        <figure className="relative bg-paper border border-ink/15 p-6 lg:p-12">
+          <svg viewBox="0 0 1280 380" className="w-full h-auto" role="img" aria-label="Cloud-native architecture stack">
+            {layers.map((l, i) => {
+              const y = 30 + i * 64;
+              const isPlatform = l.color === "#CF4520";
+              return (
+                <g key={i}>
+                  <rect x="60" y={y} width="1160" height="48" fill={isPlatform ? "#CF4520" : "none"} stroke={isPlatform ? "none" : "#0E1116"} strokeWidth="1" />
+                  <text x="80" y={y + 30} fontFamily="ui-monospace, monospace" fontSize="11" letterSpacing="2" fill={isPlatform ? "#F5F1EB" : "#0E1116"} opacity={isPlatform ? 0.85 : 0.7}>
+                    {l.t}
+                  </text>
+                  <text x="640" y={y + 32} fontFamily="serif" fontStyle="italic" fontSize="20" fill={isPlatform ? "#F5F1EB" : "#0E1116"} textAnchor="middle">
+                    {l.n}
+                  </text>
+                  {i < layers.length - 1 && (
+                    <text x="1200" y={y + 32} fontFamily="ui-monospace, monospace" fontSize="10" letterSpacing="2" fill="#0E1116" opacity="0.4" textAnchor="end">↓ contract</text>
+                  )}
+                </g>
+              );
+            })}
+            <text x="640" y="370" fontFamily="ui-monospace, monospace" fontSize="11" letterSpacing="3" fill="#CF4520" textAnchor="middle">EACH LAYER OWNED · EACH CONTRACT VERSIONED</text>
+          </svg>
+          <figcaption className="font-mono text-[10px] tracking-[0.2em] uppercase text-ink-muted mt-6">
+            Fig. 08 · Cloud-native reference architecture
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+  );
+}
+
+function ControlRoom() {
+  return (
+    <section className="px-0 lg:px-10 pb-4">
+      <div className="max-w-[1440px] mx-auto">
+        <HiggsfieldPlaceholder
+          kind="image"
+          aspect="21/9"
+          brief="Editorial wide shot of an SRE control room — wall-mounted observability dashboards glowing, dim ambient light, single engineer's silhouette mid-foreground (no face). Coral accent on a single alarm tile."
+          caption="Operations · Production observability"
+        />
+      </div>
+    </section>
+  );
+}
+
 export function CloudNativeContent({ navigate }) {
   return (
     <PageShell navigate={navigate}>
       <Hero />
+      <ControlRoom />
       <Outcomes />
+      <ArchitectureStack />
       <Differentiators />
       <CaseStudy />
       <Stack />

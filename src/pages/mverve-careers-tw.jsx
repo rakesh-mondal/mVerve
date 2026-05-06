@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { PageShell } from "../components/SiteLayout";
+import { HiggsfieldPlaceholder } from "../components/Visuals";
 
 const ROLES = [
   { team: "AI & Innovation Lab", title: "Senior AI Engineer", location: "Bengaluru / Remote", type: "Full-time" },
@@ -115,11 +116,43 @@ function OpenRoles() {
   );
 }
 
+function StudioLife() {
+  return (
+    <section className="px-6 lg:px-10 py-20 lg:py-28 bg-paper">
+      <div className="max-w-[1440px] mx-auto">
+        <div className="grid grid-cols-12 gap-6 mb-12">
+          <div className="col-span-12 lg:col-span-7">
+            <div className="font-mono text-[10px] tracking-[0.2em] uppercase text-coral mb-6">Studios</div>
+            <h2 className="font-display text-[clamp(36px,4.5vw,68px)] leading-[1] tracking-[-0.02em] font-light text-ink">
+              Two studios. <span className="italic">One team.</span>
+            </h2>
+          </div>
+        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <HiggsfieldPlaceholder
+            kind="image"
+            aspect="4/5"
+            brief="Editorial wide shot of a Bengaluru engineering studio — exposed-brick walls, long oak tables, monitors glowing, warm afternoon light through tall windows. Two engineers mid-conversation, faces away from camera."
+            caption="Bengaluru · Studio"
+          />
+          <HiggsfieldPlaceholder
+            kind="image"
+            aspect="4/5"
+            brief="Editorial wide shot of a Maryland office — minimal architecture, black framed windows, brushed concrete floor, late evening light. A single engineer at a whiteboard, mid-thought, back to camera."
+            caption="Maryland · Studio"
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export function CareersContent({ navigate }) {
   return (
     <PageShell navigate={navigate}>
       <CareersHero />
       <Values />
+      <StudioLife />
       <OpenRoles />
     </PageShell>
   );

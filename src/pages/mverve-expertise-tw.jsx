@@ -1,16 +1,17 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { PageShell } from "../components/SiteLayout";
+import { HiggsfieldPlaceholder } from "../components/Visuals";
 
 const DISCIPLINES = [
   { n: "01", t: "Cloud-Native Engineering", d: "Containers, microservices, infrastructure-as-code, and the discipline to keep them boring.", route: "cloud-native" },
-  { n: "02", t: "Enterprise Modernization", d: "Strangler-fig migrations, API layering, and the unglamorous work of getting off legacy without going dark.", route: "expertise" },
-  { n: "03", t: "Platform Engineering", d: "Internal developer platforms that make 'the right thing' also 'the easy thing.'", route: "expertise" },
-  { n: "04", t: "Digital Experience", d: "Editorial-grade frontends with the performance budget enterprise sites usually fail." },
-  { n: "05", t: "Product Strategy & Design", d: "Senior product thinking embedded in engineering, not bolted on at kickoff." },
-  { n: "06", t: "Service Design", d: "End-to-end design for products that touch operations, ops people, and physical artifacts." },
-  { n: "07", t: "Agile Pods", d: "Senior-led, full-stack teams that ship in two-week sprints with the autonomy to actually do it." },
-  { n: "08", t: "Technical Consulting", d: "Architecture reviews, due-diligence, and second opinions from the people who'd actually build it." },
+  { n: "02", t: "Enterprise Modernization", d: "Strangler-fig migrations, API layering, and the unglamorous work of getting off legacy without going dark.", route: "modernization" },
+  { n: "03", t: "Platform Engineering", d: "Internal developer platforms that make 'the right thing' also 'the easy thing.'", route: "platform" },
+  { n: "04", t: "Digital Experience", d: "Editorial-grade frontends with the performance budget enterprise sites usually fail.", route: "experience" },
+  { n: "05", t: "Product Strategy & Design", d: "Senior product thinking embedded in engineering, not bolted on at kickoff.", route: "product-strategy" },
+  { n: "06", t: "Service Design", d: "End-to-end design for products that touch operations, ops people, and physical artifacts.", route: "service-design" },
+  { n: "07", t: "Agile Pods", d: "Senior-led, full-stack teams that ship in two-week sprints with the autonomy to actually do it.", route: "agile-pods" },
+  { n: "08", t: "Technical Consulting", d: "Architecture reviews, due-diligence, and second opinions from the people who'd actually build it.", route: "consulting" },
 ];
 
 const PRINCIPLES = [
@@ -117,10 +118,26 @@ function Principles() {
   );
 }
 
+function CraftShot() {
+  return (
+    <section className="px-0 lg:px-10 pb-4">
+      <div className="max-w-[1440px] mx-auto">
+        <HiggsfieldPlaceholder
+          kind="image"
+          aspect="21/9"
+          brief="Editorial wide shot of a craft workshop — drafting tables, monitors, pinned architecture diagrams on a corkboard. Late-evening warm light, sense of considered work. No faces."
+          caption="The studio · Craft, considered"
+        />
+      </div>
+    </section>
+  );
+}
+
 export function ExpertiseHubContent({ navigate }) {
   return (
     <PageShell navigate={navigate}>
       <Hero />
+      <CraftShot />
       <Disciplines navigate={navigate} />
       <Principles />
     </PageShell>

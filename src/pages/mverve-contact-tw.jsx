@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Mail, MapPin, Clock } from "lucide-react";
 import { PageShell } from "../components/SiteLayout";
+import { HiggsfieldPlaceholder } from "../components/Visuals";
 
 const PROJECT_TYPES = [
   "AI & Innovation Lab",
@@ -163,11 +164,43 @@ function Block({ icon, title, children }) {
   );
 }
 
+function StudioPair() {
+  return (
+    <section className="px-6 lg:px-10 py-20 lg:py-28 bg-paper">
+      <div className="max-w-[1440px] mx-auto">
+        <div className="grid grid-cols-12 gap-6 mb-10">
+          <div className="col-span-12 lg:col-span-7">
+            <div className="font-mono text-[10px] tracking-[0.2em] uppercase text-coral mb-6">Where we work</div>
+            <h2 className="font-display text-[clamp(36px,4.5vw,68px)] leading-[1] tracking-[-0.02em] font-light text-ink">
+              Two studios. <span className="italic">Two timezones.</span> One team.
+            </h2>
+          </div>
+        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <HiggsfieldPlaceholder
+            kind="image"
+            aspect="4/5"
+            brief="Editorial exterior shot of a Bengaluru engineering studio — boutique street, hand-painted signage, monsoon evening light, no people. Coral accent on the doorway."
+            caption="Bengaluru · India · IST"
+          />
+          <HiggsfieldPlaceholder
+            kind="image"
+            aspect="4/5"
+            brief="Editorial exterior shot of a Maryland office — brick warehouse converted, autumn afternoon, slight side-light, no people. Coral accent on the entry door."
+            caption="Maryland · USA · ET"
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export function ContactContent({ navigate }) {
   return (
     <PageShell navigate={navigate} includeClosingCTA={false}>
       <ContactHero />
       <ContactBody />
+      <StudioPair />
     </PageShell>
   );
 }

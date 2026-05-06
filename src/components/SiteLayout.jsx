@@ -13,29 +13,31 @@ export const NAV_GROUPS = [
     label: "AI & Innovation Lab",
     feat: { t: "The mVerve Innovation Lab", d: "Where AI meets industrial intelligence — custom LLMs, agentic workflows, sustainable AI.", route: "ai-lab" },
     items: [
-      { label: "AI Lab Hub", route: "ai-lab" },
       { label: "Generative AI Solutions", route: "genai" },
-      { label: "Intelligent Automation", route: "ai-lab" },
-      { label: "Sustainable AI (GreenOps)", route: "ai-lab" },
+      { label: "Intelligent Automation", route: "automation" },
+      { label: "Sustainable AI (GreenOps)", route: "greenops" },
+      { label: "MVP Incubator", route: "mvp-incubator" },
+      { label: "Data Strategy & Engineering", route: "data-strategy" },
     ],
   },
   {
     label: "Expertise",
     feat: { t: "Engineering Excellence", d: "Eight disciplines. One standard: production-grade outcomes that move business metrics.", route: "expertise" },
     items: [
-      { label: "Expertise Hub", route: "expertise" },
       { label: "Cloud-Native Engineering", route: "cloud-native" },
-      { label: "Enterprise Modernization", route: "expertise" },
-      { label: "Platform Engineering", route: "expertise" },
+      { label: "Enterprise Modernization", route: "modernization" },
+      { label: "Platform Engineering", route: "platform" },
+      { label: "Digital Experience", route: "experience" },
+      { label: "Agile Pods", route: "agile-pods" },
     ],
   },
   {
     label: "Industries",
-    feat: { t: "Domain-First Engineering", d: "We learn your world before writing a line of code. Deep expertise across five verticals.", route: "manufacturing" },
+    feat: { t: "Domain-First Engineering", d: "We learn your world before writing a line of code. Deep expertise across industrial verticals.", route: "manufacturing" },
     items: [
       { label: "Manufacturing & Industry 4.0", route: "manufacturing" },
-      { label: "CleanTech & Sustainability", route: "manufacturing" },
-      { label: "Healthcare & Life Sciences", route: "manufacturing" },
+      { label: "CleanTech & Sustainability", route: "cleantech" },
+      { label: "Healthcare & Life Sciences", route: "healthcare" },
     ],
   },
   {
@@ -43,8 +45,8 @@ export const NAV_GROUPS = [
     feat: { t: "Thought Leadership", d: "Our opinionated take on the technologies shaping industrial AI. Updated quarterly.", route: "tech-radar" },
     items: [
       { label: "The Tech Radar", route: "tech-radar" },
-      { label: "Success Stories", route: "tech-radar" },
-      { label: "White Papers", route: "tech-radar" },
+      { label: "Success Stories", route: "success-stories" },
+      { label: "White Papers", route: "white-papers" },
     ],
   },
 ];
@@ -306,28 +308,24 @@ export function Footer({ navigate }) {
   const cols = [
     { h: "Expertise", l: [
       { t: "Cloud-Native Engineering", r: "cloud-native" },
-      { t: "Enterprise Modernization", r: "expertise" },
-      { t: "Platform Engineering", r: "expertise" },
-      { t: "Digital Experience", r: "expertise" },
-      { t: "Agile Pods", r: "expertise" },
+      { t: "Enterprise Modernization", r: "modernization" },
+      { t: "Platform Engineering", r: "platform" },
+      { t: "Digital Experience", r: "experience" },
+      { t: "Agile Pods", r: "agile-pods" },
     ]},
     { h: "Industries", l: [
       { t: "Manufacturing & Industry 4.0", r: "manufacturing" },
-      { t: "CleanTech & Sustainability", r: "manufacturing" },
-      { t: "Healthcare & Life Sciences", r: "manufacturing" },
-      { t: "Retail & Consumer", r: "manufacturing" },
-      { t: "FinTech & Insurance", r: "manufacturing" },
+      { t: "CleanTech & Sustainability", r: "cleantech" },
+      { t: "Healthcare & Life Sciences", r: "healthcare" },
     ]},
     { h: "Insights", l: [
       { t: "Tech Radar", r: "tech-radar" },
-      { t: "Success Stories", r: "tech-radar" },
-      { t: "White Papers", r: "tech-radar" },
+      { t: "Success Stories", r: "success-stories" },
+      { t: "White Papers", r: "white-papers" },
     ]},
     { h: "Company", l: [
-      { t: "About mVerve", r: "" },
       { t: "Careers", r: "careers" },
       { t: "Contact", r: "contact" },
-      { t: "Privacy", r: "" },
     ]},
   ];
 
