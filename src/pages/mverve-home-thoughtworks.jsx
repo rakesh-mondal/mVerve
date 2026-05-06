@@ -22,16 +22,15 @@ const SERVICES = [
 ];
 
 const INDUSTRIES = [
-  { n: "01", k: "Manufacturing", h: "From shop floor to smart factory.", d: "We modernize PLEX ERP, deploy predictive maintenance AI, and engineer real-time production intelligence — turning legacy plants into data-driven operations." },
-  { n: "02", k: "CleanTech", h: "Engineering the NetZero transition.", d: "Carbon credit platforms, energy grid optimization, and sustainability compliance automation. GreenOps engineers carbon out at the infrastructure level." },
-  { n: "03", k: "Healthcare", h: "Intelligent systems for better outcomes.", d: "HIPAA-compliant AI, clinical workflow automation, and patient engagement platforms built with the rigor healthcare demands." },
-  { n: "04", k: "Retail & FinTech", h: "Mid-market velocity, enterprise depth.", d: "Headless commerce, fraud intelligence, and AI-driven personalization for businesses competing against the giants." },
+  { n: "01", k: "Manufacturing", h: "From shop floor to smart factory.", d: "We modernize PLEX ERP, deploy predictive maintenance AI, and engineer real-time production intelligence — turning legacy plants into data-driven operations.", route: "manufacturing" },
+  { n: "02", k: "CleanTech", h: "Engineering the NetZero transition.", d: "Carbon credit platforms, energy grid optimization, and sustainability compliance automation. GreenOps engineers carbon out at the infrastructure level.", route: "cleantech" },
+  { n: "03", k: "Healthcare", h: "Intelligent systems for better outcomes.", d: "HIPAA-compliant AI, clinical workflow automation, and patient engagement platforms built with the rigor healthcare demands.", route: "healthcare" },
 ];
 
 const INSIGHTS = [
-  { kicker: "Tech Radar Q1 2026", t: "What we tell clients to adopt, trial, assess and avoid this quarter.", read: "12 min read" },
-  { kicker: "Case study", t: "How a 15-year-old PLEX ERP became cloud-native in 18 weeks — with zero downtime.", read: "6 min read" },
-  { kicker: "Field notes", t: "GreenOps in practice: the seven design moves that cut our client's carbon by 62%.", read: "9 min read" },
+  { kicker: "Tech Radar Q1 2026", t: "What we tell clients to adopt, trial, assess and avoid this quarter.", read: "12 min read", route: "tech-radar" },
+  { kicker: "Case study", t: "How a 15-year-old PLEX ERP became cloud-native in 18 weeks — with zero downtime.", read: "6 min read", route: "cloud-native" },
+  { kicker: "Field notes", t: "GreenOps in practice: the seven design moves that cut our client's carbon by 62%.", read: "9 min read", route: "greenops" },
 ];
 
 const METHODOLOGY = [
@@ -114,7 +113,7 @@ function Marquee() {
 }
 
 /* ─── Featured insights ─── */
-function Insights() {
+function Insights({ navigate }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, amount: 0.2 });
   return (
@@ -131,15 +130,15 @@ function Insights() {
             <p className="text-[15px] leading-relaxed text-ink-soft">
               The mVerve point of view on the technologies, methods, and decisions shaping industrial AI. Updated quarterly, written by the engineers shipping the work.
             </p>
-            <a href="#" className="inline-flex items-center gap-2 mt-6 text-[13px] font-medium link-reveal">
+            <button onClick={() => navigate && navigate("tech-radar")} className="inline-flex items-center gap-2 mt-6 text-[13px] font-medium link-reveal">
               All insights <ArrowUpRight size={14} />
-            </a>
+            </button>
           </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
           {INSIGHTS.map((card, i) => (
-            <motion.a key={i} href="#" initial={{ opacity: 0, y: 40 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] }} className="group block">
+            <motion.button key={i} type="button" onClick={() => navigate && navigate(card.route)} initial={{ opacity: 0, y: 40 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] }} className="group block text-left w-full">
               <div className="relative aspect-[4/5] overflow-hidden bg-cream-deep mb-6">
                 <div className="absolute inset-0 transition-transform duration-[1200ms] ease-out group-hover:scale-105" style={{
                   background: i === 0 ? "radial-gradient(120% 80% at 20% 100%, #CF4520 0%, #E8E4DA 60%)" :
@@ -158,7 +157,7 @@ function Insights() {
               <h3 className="font-display text-[22px] lg:text-[26px] leading-[1.2] tracking-[-0.01em] text-ink font-light group-hover:text-coral transition-colors">
                 {card.t}
               </h3>
-            </motion.a>
+            </motion.button>
           ))}
         </div>
       </div>
@@ -229,7 +228,7 @@ function PinnedServices() {
 }
 
 /* ─── Industries list ─── */
-function Industries() {
+function Industries({ navigate }) {
   const [hover, setHover] = useState(null);
   return (
     <section className="bg-cream py-20 lg:py-28 px-6 lg:px-10 relative">
@@ -244,7 +243,7 @@ function Industries() {
         </div>
         <div className="border-t border-ink/15">
           {INDUSTRIES.map((row, i) => (
-            <div key={i} onMouseEnter={() => setHover(i)} onMouseLeave={() => setHover(null)} className="group relative grid grid-cols-12 gap-6 items-baseline border-b border-ink/15 py-8 lg:py-12 cursor-pointer transition-colors">
+            <div key={i} role="link" tabIndex={0} onClick={() => navigate && navigate(row.route)} onKeyDown={(e) => { if ((e.key === "Enter" || e.key === " ") && navigate) { e.preventDefault(); navigate(row.route); } }} onMouseEnter={() => setHover(i)} onMouseLeave={() => setHover(null)} className="group relative grid grid-cols-12 gap-6 items-baseline border-b border-ink/15 py-8 lg:py-12 cursor-pointer transition-colors">
               <div className="col-span-2 lg:col-span-1 font-mono text-[11px] tracking-[0.2em] text-ink-muted pt-2">{row.n}</div>
               <div className="col-span-10 lg:col-span-3">
                 <div className="font-display text-[clamp(28px,3.4vw,52px)] leading-[1] tracking-[-0.01em] font-light text-ink group-hover:text-coral transition-colors">{row.k}</div>
@@ -373,9 +372,9 @@ export function HomepageContent({ navigate }) {
       <Hero />
       <Showcase />
       <Marquee />
-      <Insights />
+      <Insights navigate={navigate} />
       <PinnedServices />
-      <Industries />
+      <Industries navigate={navigate} />
       <MetricsBand />
       <ValueProps />
       <Methodology />
