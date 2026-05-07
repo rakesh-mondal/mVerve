@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { PageShell } from "../components/SiteLayout";
-import { HiggsfieldPlaceholder } from "../components/Visuals";
+import { EditorialFigure } from "../components/Visuals";
+import standupImg from "../assets/agile-pods-standup.png";
 
 const TRUTHS = [
   { h: "Most 'agile' is just waterfall in two-week increments.", d: "Stand-ups, sprint reviews, and a retro every fortnight do not make a team agile. The autonomy to actually decide what to ship does." },
@@ -189,12 +190,14 @@ function StandupShot() {
   return (
     <section className="px-0 lg:px-10 pb-4">
       <div className="max-w-[1440px] mx-auto">
-        <HiggsfieldPlaceholder
-          kind="image"
-          aspect="21/9"
-          brief="Standing-room editorial shot — six engineers around a single screen at a tall standup desk, late afternoon, exposed brick. No faces visible, sense of focused conversation."
-          caption="Standup · The pod, mid-sprint"
-        />
+        <EditorialFigure caption="Standup · The pod, mid-sprint">
+          <img
+            src={standupImg}
+            alt="Engineers gathered around a single screen at a tall standup desk, exposed-brick wall behind, late afternoon light"
+            className="w-full block"
+            style={{ aspectRatio: "21/9", objectFit: "cover" }}
+          />
+        </EditorialFigure>
       </div>
     </section>
   );

@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { PageShell } from "../components/SiteLayout";
-import { HiggsfieldPlaceholder } from "../components/Visuals";
+import { EditorialFigure } from "../components/Visuals";
+import podImg from "../assets/mvp-incubator-pod.png";
 
 const FAILS = [
   { h: "MVPs that aren't minimum or viable.", d: "Most 'MVPs' are either six-month engineering projects in disguise or throwaway prototypes nobody can ship. Neither tells you anything." },
@@ -225,12 +226,14 @@ function StudioShot() {
   return (
     <section className="px-0 lg:px-10 pb-4">
       <div className="max-w-[1440px] mx-auto">
-        <HiggsfieldPlaceholder
-          kind="image"
-          aspect="21/9"
-          brief="A small senior pod mid-build — three engineers at a single long table, two screens each, sticky notes on a wall behind them, late-evening warm light. Backs to camera."
-          caption="The Incubator · Active build"
-        />
+        <EditorialFigure caption="The Incubator · Active build">
+          <img
+            src={podImg}
+            alt="Three engineers at a long table with multiple screens, wall of sticky notes behind, late-evening warm light, backs to camera"
+            className="w-full block"
+            style={{ aspectRatio: "21/9", objectFit: "cover" }}
+          />
+        </EditorialFigure>
       </div>
     </section>
   );

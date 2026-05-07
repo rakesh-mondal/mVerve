@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { PageShell } from "../components/SiteLayout";
-import { HiggsfieldPlaceholder } from "../components/Visuals";
+import { EditorialFigure } from "../components/Visuals";
+import clinicalImg from "../assets/healthcare-clinical.png";
 
 const REALITIES = [
   { h: "EHR data is necessary, insufficient, and difficult.", d: "FHIR, HL7, and the dozen flavours of legacy interface engines describe how the data moves — not how it tells the truth. Cleaning is most of the work." },
@@ -153,12 +154,14 @@ function ClinicalShot() {
   return (
     <section className="px-0 lg:px-10 pb-4">
       <div className="max-w-[1440px] mx-auto">
-        <HiggsfieldPlaceholder
-          kind="image"
-          aspect="21/9"
-          brief="Editorial wide shot of a modern clinic exam room — single overhead light, monitor on the wall showing a patient summary, clinician's hands on a tablet (no face). Warm clinical, not sterile. Coral accent on the monitor glow."
-          caption="Point of care · Outpatient clinic"
-        />
+        <EditorialFigure caption="Point of care · Outpatient clinic">
+          <img
+            src={clinicalImg}
+            alt="Modern outpatient clinic exam room — clinician's hands on a tablet, wall-mounted monitor showing a structured patient summary"
+            className="w-full block"
+            style={{ aspectRatio: "21/9", objectFit: "cover" }}
+          />
+        </EditorialFigure>
       </div>
     </section>
   );

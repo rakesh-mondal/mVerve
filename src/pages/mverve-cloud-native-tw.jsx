@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { PageShell } from "../components/SiteLayout";
-import { HiggsfieldPlaceholder } from "../components/Visuals";
+import { EditorialFigure } from "../components/Visuals";
+import controlRoomImg from "../assets/cloud-native-control-room.png";
 
 const OUTCOMES = [
   { v: "$2M+", l: "Annual infrastructure savings per engagement" },
@@ -204,12 +205,14 @@ function ControlRoom() {
   return (
     <section className="px-0 lg:px-10 pb-4">
       <div className="max-w-[1440px] mx-auto">
-        <HiggsfieldPlaceholder
-          kind="image"
-          aspect="21/9"
-          brief="Editorial wide shot of an SRE control room — wall-mounted observability dashboards glowing, dim ambient light, single engineer's silhouette mid-foreground (no face). Coral accent on a single alarm tile."
-          caption="Operations · Production observability"
-        />
+        <EditorialFigure caption="Operations · Production observability">
+          <img
+            src={controlRoomImg}
+            alt="SRE control room with a wall of observability dashboards, a single engineer silhouette mid-foreground"
+            className="w-full block"
+            style={{ aspectRatio: "21/9", objectFit: "cover" }}
+          />
+        </EditorialFigure>
       </div>
     </section>
   );

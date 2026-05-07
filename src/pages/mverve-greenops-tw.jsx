@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { PageShell } from "../components/SiteLayout";
-import { HiggsfieldPlaceholder } from "../components/Visuals";
+import { EditorialFigure } from "../components/Visuals";
+import datacenterImg from "../assets/greenops-datacenter.png";
 
 const FORCES = [
   { h: "Compute is now an emissions line.", d: "Scope-3 reporting frameworks (CSRD, SEC climate rules, GHG Protocol) increasingly demand cloud and data-center carbon disclosure. The audit is coming." },
@@ -210,12 +211,14 @@ function DataCenter() {
   return (
     <section className="px-0 lg:px-10 pb-4">
       <div className="max-w-[1440px] mx-auto">
-        <HiggsfieldPlaceholder
-          kind="image"
-          aspect="21/9"
-          brief="Long aisle of a hyperscale data centre, low blue-green ambient lighting, server racks vanishing to perspective, faint coral exit-sign glow at the end. No people."
-          caption="Hyperscale · Carbon-aware scheduling"
-        />
+        <EditorialFigure caption="Hyperscale · Carbon-aware scheduling">
+          <img
+            src={datacenterImg}
+            alt="Long aisle of a hyperscale data centre, server racks vanishing to perspective with a coral exit-sign glow at the far end"
+            className="w-full block"
+            style={{ aspectRatio: "21/9", objectFit: "cover" }}
+          />
+        </EditorialFigure>
       </div>
     </section>
   );
