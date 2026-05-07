@@ -1,7 +1,9 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { PageShell } from "../components/SiteLayout";
-import { HiggsfieldPlaceholder } from "../components/Visuals";
+import { HiggsfieldPlaceholder, EditorialFigure } from "../components/Visuals";
+import whitepaperOpenSpread from "../assets/whitepaper-open-spread.png";
+import whitepaperLibraryShelf from "../assets/whitepaper-library-shelf.png";
 
 const PAPERS = [
   {
@@ -139,18 +141,22 @@ function CoverSpread() {
             brief="A flat-lay of a printed white paper cover — cream paper stock, large serif title, coral underline rule, small mono tag. Top-down, natural daylight, slight shadow."
             caption="No. 01 · GenAI in production"
           />
-          <HiggsfieldPlaceholder
-            kind="image"
-            aspect="3/4"
-            brief="Open spread of a printed white paper — body type at left, an architectural diagram at right rendered in coral on cream. Top-down, slight grain."
-            caption="No. 02 · Strangler-fig playbook"
-          />
-          <HiggsfieldPlaceholder
-            kind="image"
-            aspect="3/4"
-            brief="Stacked spines of three printed reports on a desk corner, side-light from a window, soft focus. Coral edges visible on top spine."
-            caption="The library · Q1 2026"
-          />
+          <EditorialFigure caption="No. 02 · Strangler-fig playbook">
+            <img
+              src={whitepaperOpenSpread}
+              alt="Open spread of a printed white paper"
+              className="w-full block"
+              style={{ aspectRatio: "3/4", objectFit: "cover" }}
+            />
+          </EditorialFigure>
+          <EditorialFigure caption="The library · Q1 2026">
+            <img
+              src={whitepaperLibraryShelf}
+              alt="Library shelf with printed white paper reports"
+              className="w-full block"
+              style={{ aspectRatio: "3/4", objectFit: "cover" }}
+            />
+          </EditorialFigure>
         </div>
       </div>
     </section>
