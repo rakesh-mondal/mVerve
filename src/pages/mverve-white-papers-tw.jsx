@@ -2,7 +2,8 @@ import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { PageShell } from "../components/SiteLayout";
 import { HiggsfieldPlaceholder, EditorialFigure } from "../components/Visuals";
-import whitepaperOpenSpread from "../assets/whitepaper-open-spread.png";
+import whitepaperCoverFlatlay from "../assets/whitepaper-open-spread.png";
+import whitepaperOpenSpread from "../assets/whitepaper-open-spread-2.png";
 import whitepaperLibraryShelf from "../assets/whitepaper-library-shelf.png";
 
 const PAPERS = [
@@ -135,12 +136,14 @@ function CoverSpread() {
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <HiggsfieldPlaceholder
-            kind="image"
-            aspect="3/4"
-            brief="A flat-lay of a printed white paper cover — cream paper stock, large serif title, coral underline rule, small mono tag. Top-down, natural daylight, slight shadow."
-            caption="No. 01 · GenAI in production"
-          />
+          <EditorialFigure caption="No. 01 · GenAI in production">
+            <img
+              src={whitepaperCoverFlatlay}
+              alt="White paper cover flat-lay — Beyond the Demo"
+              className="w-full block"
+              style={{ aspectRatio: "3/4", objectFit: "cover" }}
+            />
+          </EditorialFigure>
           <EditorialFigure caption="No. 02 · Strangler-fig playbook">
             <img
               src={whitepaperOpenSpread}
