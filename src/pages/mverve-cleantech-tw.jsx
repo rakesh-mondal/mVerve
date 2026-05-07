@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { PageShell } from "../components/SiteLayout";
-import { HiggsfieldPlaceholder } from "../components/Visuals";
+import { EditorialFigure } from "../components/Visuals";
+import fieldVideo from "../assets/cleantech-field.mp4";
 
 const CHALLENGES = [
   { h: "Hardware companies running on software built for SaaS.", d: "Battery, solar, EV-charging, and microgrid operators are being asked to behave like software companies — by investors, regulators, and customers — without the platforms to do it." },
@@ -147,12 +148,18 @@ function FieldShot() {
   return (
     <section className="px-0 lg:px-10 pb-4">
       <div className="max-w-[1440px] mx-auto">
-        <HiggsfieldPlaceholder
-          kind="animation"
-          aspect="21/9"
-          brief="Aerial shot at sunrise — utility-scale solar farm in foreground, battery storage containers mid-ground, distant transmission towers. Coral horizon, ink shadows. Slow lateral drift."
-          caption="Asset fleet · Utility-scale solar + storage"
-        />
+        <EditorialFigure caption="Asset fleet · Utility-scale solar + storage">
+          <video
+            src={fieldVideo}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="metadata"
+            className="w-full block"
+            style={{ aspectRatio: "21/9", objectFit: "cover" }}
+          />
+        </EditorialFigure>
       </div>
     </section>
   );
