@@ -4,7 +4,8 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowUpRight, Plus } from "lucide-react";
 import { PageShell } from "../components/SiteLayout";
-import { HiggsfieldPlaceholder } from "../components/Visuals";
+import { HiggsfieldPlaceholder, EditorialFigure } from "../components/Visuals";
+import homeHero from "../assets/home-hero.mp4";
 
 /* ─── Content sourced from src/pages/mverve-homepage-wireframe.jsx ─── */
 const VALUE_PROPS = [
@@ -355,12 +356,18 @@ function Showcase() {
   return (
     <section className="px-6 lg:px-10 pb-12 lg:pb-16">
       <div className="max-w-[1440px] mx-auto">
-        <HiggsfieldPlaceholder
-          kind="animation"
-          aspect="21/9"
-          brief="Cinematic loop — slow push-in across a working factory floor at dusk: amber sodium lamps, polished concrete, a single robotic arm lit in coral. Atmospheric, editorial, no people."
-          caption="Hero · Industrial Future"
-        />
+        <EditorialFigure caption="Hero · Industrial Future">
+          <video
+            src={homeHero}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="metadata"
+            className="w-full block"
+            style={{ aspectRatio: "21/9", objectFit: "cover" }}
+          />
+        </EditorialFigure>
       </div>
     </section>
   );
