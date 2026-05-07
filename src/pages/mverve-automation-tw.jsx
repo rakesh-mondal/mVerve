@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { PageShell } from "../components/SiteLayout";
-import { HiggsfieldPlaceholder } from "../components/Visuals";
+import { EditorialFigure } from "../components/Visuals";
+import inspectionFloor from "../assets/automation-inspection-floor.png";
 
 const PROBLEMS = [
   { h: "RPA that breaks every time the UI moves.", d: "Screen-scraping bots are brittle by design. The first system update kills the workflow — and the team that maintained it has moved on." },
@@ -261,12 +262,14 @@ function Floor() {
   return (
     <section className="px-0 lg:px-10 pb-4">
       <div className="max-w-[1440px] mx-auto">
-        <HiggsfieldPlaceholder
-          kind="image"
-          aspect="21/9"
-          brief="Quality-inspection station on a packaging line — overhead vision camera, conveyor belts, units passing through. Coral-tinted highlights on machinery, ink shadows."
-          caption="Inspection · Specialty packaging plant"
-        />
+        <EditorialFigure caption="Inspection · Specialty packaging plant">
+          <img
+            src={inspectionFloor}
+            alt="Quality-inspection station on a packaging line — overhead vision camera on a steel arm, conveyor belt with units, indicator LEDs, ink shadows"
+            className="w-full block"
+            style={{ aspectRatio: "21/9", objectFit: "cover" }}
+          />
+        </EditorialFigure>
       </div>
     </section>
   );

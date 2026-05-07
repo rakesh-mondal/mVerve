@@ -1,7 +1,9 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { PageShell } from "../components/SiteLayout";
-import { HiggsfieldPlaceholder } from "../components/Visuals";
+import { EditorialFigure } from "../components/Visuals";
+import bengaluruStudio from "../assets/careers-bengaluru-studio.png";
+import marylandOffice from "../assets/careers-maryland-office.png";
 
 const ROLES = [
   { team: "AI & Innovation Lab", title: "Senior AI Engineer", location: "Bengaluru / Remote", type: "Full-time" },
@@ -129,18 +131,22 @@ function StudioLife() {
           </div>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <HiggsfieldPlaceholder
-            kind="image"
-            aspect="4/5"
-            brief="Editorial wide shot of a Bengaluru engineering studio — exposed-brick walls, long oak tables, monitors glowing, warm afternoon light through tall windows. Two engineers mid-conversation, faces away from camera."
-            caption="Bengaluru · Studio"
-          />
-          <HiggsfieldPlaceholder
-            kind="image"
-            aspect="4/5"
-            brief="Editorial wide shot of a Maryland office — minimal architecture, black framed windows, brushed concrete floor, late evening light. A single engineer at a whiteboard, mid-thought, back to camera."
-            caption="Maryland · Studio"
-          />
+          <EditorialFigure caption="Bengaluru · Studio">
+            <img
+              src={bengaluruStudio}
+              alt="Bengaluru engineering studio — exposed-brick walls, oak tables with monitors, two engineers in mid-distance, warm afternoon light through tall windows"
+              className="w-full block"
+              style={{ aspectRatio: "4/5", objectFit: "cover" }}
+            />
+          </EditorialFigure>
+          <EditorialFigure caption="Maryland · Studio">
+            <img
+              src={marylandOffice}
+              alt="Maryland office — minimal architecture, large autumn-lit windows, single engineer at a whiteboard mid-thought back to camera, brushed concrete floor"
+              className="w-full block"
+              style={{ aspectRatio: "4/5", objectFit: "cover" }}
+            />
+          </EditorialFigure>
         </div>
       </div>
     </section>
