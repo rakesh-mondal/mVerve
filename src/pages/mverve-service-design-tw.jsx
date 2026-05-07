@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { PageShell } from "../components/SiteLayout";
-import { HiggsfieldPlaceholder } from "../components/Visuals";
+import { EditorialFigure } from "../components/Visuals";
+import workshopImage from "../assets/service-design-workshop.png";
 
 const TRUTHS = [
   { h: "Software is only ever half the service.", d: "The other half is the call centre, the warehouse, the field engineer, the regulatory filing. If your design stops at the screen, you've designed half a thing." },
@@ -243,12 +244,14 @@ function Workshop() {
           </h2>
         </div>
         <div className="col-span-12 lg:col-span-6 lg:col-start-7">
-          <HiggsfieldPlaceholder
-            kind="image"
-            aspect="4/5"
-            brief="Top-down editorial shot of a wall covered in service-blueprint sticky notes — coral and black notes on cream paper, hands gesturing in frame, no faces. Natural daylight."
-            caption="Workshop · Service blueprint · 2026"
-          />
+          <EditorialFigure caption="Workshop · Service blueprint · 2026">
+            <img
+              src={workshopImage}
+              alt="Wall of hand-drawn service blueprint sticky notes in coral and ink, hands holding a marker mid-mark"
+              className="w-full block"
+              style={{ aspectRatio: "4/5", objectFit: "cover" }}
+            />
+          </EditorialFigure>
         </div>
       </div>
     </section>
