@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { PageShell } from "../components/SiteLayout";
-import { HiggsfieldPlaceholder } from "../components/Visuals";
+import { EditorialFigure } from "../components/Visuals";
+import manufacturingFloorVideo from "../assets/manufacturing-floor.mp4";
 
 const SOLUTIONS = [
   { tag: "PLEX EXPERTISE", t: "PLEX ERP Modernization", d: "Cloud migration via the strangler-fig pattern. Modern API layers. Custom extensions. Microservices extraction. Zero-downtime cutover." },
@@ -186,12 +187,18 @@ function FloorShot() {
   return (
     <section className="px-0 lg:px-10 pb-4">
       <div className="max-w-[1440px] mx-auto">
-        <HiggsfieldPlaceholder
-          kind="animation"
-          aspect="21/9"
-          brief="Slow lateral dolly across an active production line at golden hour — CNC machines, sparks, sodium lamps. Coral-tinted highlights, ink shadows. No faces visible."
-          caption="Production floor · Tier-1 automotive supplier"
-        />
+        <EditorialFigure caption="Production floor · Tier-1 automotive supplier">
+          <video
+            src={manufacturingFloorVideo}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="metadata"
+            className="w-full block"
+            style={{ aspectRatio: "21/9", objectFit: "cover" }}
+          />
+        </EditorialFigure>
       </div>
     </section>
   );
