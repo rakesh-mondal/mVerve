@@ -154,7 +154,7 @@ function Insights({ navigate }) {
                 </div>
               </div>
               <div className="font-mono text-[10px] tracking-[0.2em] uppercase text-ink-muted mb-3">{card.kicker} · {card.read}</div>
-              <h3 className="font-display text-[22px] lg:text-[26px] leading-[1.2] tracking-[-0.01em] text-ink font-light group-hover:text-coral transition-colors">
+              <h3 className="font-display text-[22px] lg:text-[26px] leading-[1.2] tracking-[-0.01em] text-ink font-light group-hover:text-coral transition-colors lg:min-h-[6rem]">
                 {card.t}
               </h3>
             </motion.button>
