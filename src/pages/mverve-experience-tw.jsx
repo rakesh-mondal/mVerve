@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { PageShell } from "../components/SiteLayout";
-import { HiggsfieldPlaceholder } from "../components/Visuals";
+import { EditorialFigure } from "../components/Visuals";
+import showreelVideo from "../assets/experience-showreel.mp4";
 
 const TRUTHS = [
   { h: "Enterprise frontends are usually slow, ugly, and accessible to nobody.", d: "Most B2B and industrial UIs are stuck in a 2014 Bootstrap era. Editorial-grade craft is treated as 'nice to have.' We disagree." },
@@ -178,12 +179,18 @@ function Showreel() {
   return (
     <section className="px-0 lg:px-10 pb-4">
       <div className="max-w-[1440px] mx-auto">
-        <HiggsfieldPlaceholder
-          kind="animation"
-          aspect="21/9"
-          brief="Slow scroll past three editorial site screens — long-form headline, wide product photography, dashboard view — type elegantly settling, soft motion blur. Coral underline accents."
-          caption="Recent work · Editorial frontends"
-        />
+        <EditorialFigure caption="Recent work · Editorial frontends">
+          <video
+            src={showreelVideo}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="metadata"
+            className="w-full block"
+            style={{ aspectRatio: "21/9", objectFit: "cover" }}
+          />
+        </EditorialFigure>
       </div>
     </section>
   );
