@@ -4,6 +4,7 @@ import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowUpRight, Linkedin, Twitter, Facebook } from "lucide-react";
+import logoSvg from "../assets/mverve-logo.svg";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -114,12 +115,9 @@ export function TopBar({ navigate }) {
       }`}
       onMouseLeave={handleLeave}
     >
-      <div className="max-w-[1440px] mx-auto px-6 lg:px-10 flex items-center justify-between h-16 lg:h-[80px]">
-        <button onClick={() => go("")} className="flex items-baseline gap-2 group cursor-pointer">
-          <span className="font-display text-2xl lg:text-[30px] font-medium tracking-tight text-ink">
-            m<span className="italic font-light">Verve</span>
-          </span>
-          <span className="w-1.5 h-1.5 rounded-full bg-coral group-hover:scale-150 transition-transform" />
+      <div className="max-w-[1440px] mx-auto px-6 lg:px-10 flex items-center justify-between h-24 lg:h-28">
+        <button onClick={() => go("")} className="flex items-center group cursor-pointer" aria-label="mVerve home">
+          <img src={logoSvg} alt="mVerve" className="h-20 lg:h-24 w-auto block" />
         </button>
 
         {/* Desktop nav — bigger fonts */}
@@ -230,7 +228,7 @@ export function TopBar({ navigate }) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
-            style={{ position: "fixed", top: 64, left: 0, right: 0, bottom: 0, zIndex: 100 }}
+            style={{ position: "fixed", top: 96, left: 0, right: 0, bottom: 0, zIndex: 100 }}
             className="xl:hidden bg-cream overflow-y-auto overscroll-contain"
           >
             <div className="px-6 py-8 pb-32 flex flex-col gap-2">
@@ -348,7 +346,6 @@ export function Footer({ navigate }) {
       <div className="max-w-[1440px] mx-auto">
         <div className="grid grid-cols-12 gap-8 mb-20">
           <div className="col-span-12 lg:col-span-4">
-            <div className="font-display text-5xl font-light text-ink mb-6">m<span className="italic">Verve</span><span className="text-coral">.</span></div>
             <p className="text-[15px] leading-relaxed text-ink-soft max-w-sm mb-8">
               AI-Native engineering for the industrial future. Bridging heavy industry and cognitive intelligence.
             </p>
