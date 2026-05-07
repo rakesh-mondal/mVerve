@@ -57,11 +57,85 @@ function Hero() {
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
   return (
     <section ref={ref} className="relative pt-32 lg:pt-40 pb-20 lg:pb-28 overflow-hidden">
-      <motion.svg style={{ y }} className="absolute -right-40 -top-20 w-[520px] h-[520px] lg:w-[680px] lg:h-[680px] opacity-90 pointer-events-none" viewBox="0 0 640 640" fill="none">
+      <motion.svg style={{ y }} className="absolute -right-40 top-24 lg:top-28 w-[520px] h-[520px] lg:w-[680px] lg:h-[680px] opacity-90 pointer-events-none" viewBox="0 0 640 640" fill="none">
+        {/* Static orbital rings */}
         <circle cx="320" cy="320" r="319" stroke="#CF4520" strokeWidth="1.2" />
         <circle cx="320" cy="320" r="240" stroke="#CF4520" strokeWidth="1" opacity="0.35" />
         <circle cx="320" cy="320" r="160" stroke="#0E1116" strokeWidth="1" opacity="0.15" />
+
+        {/* Bold coral arc — preserved */}
         <path d="M40 320 A 280 280 0 0 1 320 40" stroke="#CF4520" strokeWidth="14" strokeLinecap="round" />
+
+        {/* Slow-rotating tick ring — telemetry / time signal */}
+        <motion.g
+          animate={{ rotate: 360 }}
+          transition={{ duration: 140, repeat: Infinity, ease: "linear" }}
+          style={{ transformOrigin: "320px 320px" }}
+        >
+          {[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map((angle) => {
+            const rad = (angle * Math.PI) / 180;
+            const x1 = 320 + Math.cos(rad) * 312;
+            const y1 = 320 + Math.sin(rad) * 312;
+            const x2 = 320 + Math.cos(rad) * 322;
+            const y2 = 320 + Math.sin(rad) * 322;
+            return <line key={angle} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#CF4520" strokeWidth="1" opacity="0.55" />;
+          })}
+        </motion.g>
+
+        {/* Sensor nodes — pulse softly, suggest connected systems */}
+        {[
+          { r: 319, angle: 100, delay: 0 },
+          { r: 319, angle: 200, delay: 0.6 },
+          { r: 240, angle: 130, delay: 0.3 },
+          { r: 240, angle: 230, delay: 0.9 },
+          { r: 160, angle: 90, delay: 0.4 },
+          { r: 160, angle: 180, delay: 1.0 },
+        ].map((node, i) => {
+          const rad = (node.angle * Math.PI) / 180;
+          const x = 320 + Math.cos(rad) * node.r;
+          const y = 320 + Math.sin(rad) * node.r;
+          return (
+            <g key={i}>
+              <motion.circle
+                cx={x} cy={y} r="10"
+                fill="#CF4520"
+                animate={{ opacity: [0.05, 0.22, 0.05] }}
+                transition={{ duration: 2.6, repeat: Infinity, delay: node.delay, ease: "easeInOut" }}
+              />
+              <motion.circle
+                cx={x} cy={y} r="3.5"
+                fill="#CF4520"
+                animate={{ opacity: [0.55, 1, 0.55] }}
+                transition={{ duration: 2.6, repeat: Infinity, delay: node.delay, ease: "easeInOut" }}
+              />
+            </g>
+          );
+        })}
+
+        {/* Data pulses traveling along the orbital paths — telemetry in motion */}
+        <circle r="2.5" fill="#CF4520">
+          <animateMotion
+            dur="28s"
+            repeatCount="indefinite"
+            path="M 320,1 A 319,319 0 1,1 320,639 A 319,319 0 1,1 320,1 Z"
+          />
+        </circle>
+        <circle r="2" fill="#CF4520" opacity="0.75">
+          <animateMotion
+            dur="18s"
+            repeatCount="indefinite"
+            begin="3s"
+            path="M 320,80 A 240,240 0 1,1 320,560 A 240,240 0 1,1 320,80 Z"
+          />
+        </circle>
+        <circle r="1.5" fill="#0E1116" opacity="0.5">
+          <animateMotion
+            dur="12s"
+            repeatCount="indefinite"
+            begin="6s"
+            path="M 320,160 A 160,160 0 1,1 320,480 A 160,160 0 1,1 320,160 Z"
+          />
+        </circle>
       </motion.svg>
 
       <motion.div style={{ opacity }} className="relative z-10 max-w-[1440px] w-full mx-auto px-6 lg:px-10">
@@ -79,7 +153,7 @@ function Hero() {
         </h1>
 
         <div className="grid grid-cols-12 gap-6 mt-12 lg:mt-16">
-          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.55 }} className="col-span-12 lg:col-span-5 lg:col-start-7 text-[16px] lg:text-[18px] leading-relaxed text-ink-soft">
+          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.55 }} className="col-span-12 lg:col-span-5 lg:col-start-4 text-[16px] lg:text-[18px] leading-relaxed text-ink-soft">
             Where manufacturing meets intelligence. mVerve builds AI-powered platforms, modernizes legacy infrastructure, and deploys carbon-aware technology — so mid-market enterprises can compete like the giants.
           </motion.p>
         </div>
