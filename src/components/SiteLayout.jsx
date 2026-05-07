@@ -4,7 +4,7 @@ import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowUpRight, Linkedin, Twitter, Facebook } from "lucide-react";
-import logoSvg from "../assets/mverve-logo.svg";
+import logoSvg from "../assets/mverve-logo-new.svg";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -117,7 +117,7 @@ export function TopBar({ navigate }) {
     >
       <div className="max-w-[1440px] mx-auto px-6 lg:px-10 flex items-center justify-between h-24 lg:h-28">
         <button onClick={() => go("")} className="flex items-center group cursor-pointer" aria-label="mVerve home">
-          <img src={logoSvg} alt="mVerve" className="h-20 lg:h-24 w-auto block" />
+          <img src={logoSvg} alt="mVerve" className="h-12 lg:h-14 w-auto block" />
         </button>
 
         {/* Desktop nav — bigger fonts */}
