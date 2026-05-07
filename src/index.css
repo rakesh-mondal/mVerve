@@ -18,6 +18,15 @@
   --font-mono: "JetBrains Mono", monospace;
 }
 
+/* Tailwind v4 preflight clears cursor on buttons; restore it. */
+button:not(:disabled),
+[role="button"]:not([aria-disabled="true"]),
+a[href],
+summary,
+label[for] {
+  cursor: pointer;
+}
+
 html, body {
   background: var(--color-cream);
   color: var(--color-ink);

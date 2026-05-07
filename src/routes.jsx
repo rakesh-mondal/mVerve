@@ -1,5 +1,23 @@
-import { Outlet } from "react-router-dom";
+import { useEffect } from "react";
+import { Outlet, useLocation } from "react-router-dom";
 import PageWrapper from "./PageWrapper";
+
+// Resets scroll to top on every route change. Stops Lenis (smooth scroll)
+// before jumping so it doesn't re-animate the user back to the previous spot.
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    const lenis = typeof window !== "undefined" ? window.__lenis : null;
+    if (lenis) {
+      lenis.stop();
+      lenis.scrollTo(0, { immediate: true, force: true });
+      lenis.start();
+    } else if (typeof window !== "undefined") {
+      window.scrollTo(0, 0);
+    }
+  }, [pathname]);
+  return null;
+}
 
 import { HomepageContent } from "./pages/mverve-home-thoughtworks";
 import { ContactContent } from "./pages/mverve-contact-tw";
@@ -63,7 +81,12 @@ const PAGES = [
   { path: "/terms", Component: TermsContent, title: "Terms of Use — mVerve", desc: "Terms and conditions that govern your access to and use of the mVerve Technologies website." },
 ];
 
-const Layout = () => <Outlet />;
+const Layout = () => (
+  <>
+    <ScrollToTop />
+    <Outlet />
+  </>
+);
 
 export const routes = [
   {
