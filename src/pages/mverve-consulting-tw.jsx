@@ -20,7 +20,7 @@ const PRINCIPLES = [
 function Hero() {
   return (
     <section className="relative pt-32 lg:pt-40 pb-20 lg:pb-28 overflow-hidden">
-      <motion.svg className="absolute -right-32 top-32 w-[500px] h-[500px] opacity-90 pointer-events-none" viewBox="0 0 640 640" fill="none">
+      <motion.svg className="absolute -right-24 sm:-right-32 top-32 w-[280px] h-[280px] sm:w-[500px] sm:h-[500px] opacity-30 sm:opacity-90 pointer-events-none" viewBox="0 0 640 640" fill="none">
         <path d="M320 60 L580 320 L320 580 L60 320 Z" stroke="#CF4520" strokeWidth="1" opacity="0.3" />
         <path d="M320 140 L500 320 L320 500 L140 320 Z" stroke="#CF4520" strokeWidth="1" opacity="0.5" />
         <path d="M320 60 L320 580" stroke="#CF4520" strokeWidth="14" strokeLinecap="round" />

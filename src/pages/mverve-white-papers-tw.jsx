@@ -54,7 +54,7 @@ const PAPERS = [
 function Hero() {
   return (
     <section className="relative pt-32 lg:pt-40 pb-20 lg:pb-28 overflow-hidden">
-      <motion.svg className="absolute -right-32 top-32 w-[500px] h-[500px] opacity-90 pointer-events-none" viewBox="0 0 640 640" fill="none">
+      <motion.svg className="absolute -right-24 sm:-right-32 top-32 w-[280px] h-[280px] sm:w-[500px] sm:h-[500px] opacity-30 sm:opacity-90 pointer-events-none" viewBox="0 0 640 640" fill="none">
         <line x1="80" y1="120" x2="560" y2="120" stroke="#CF4520" strokeWidth="14" strokeLinecap="round" />
         {[180, 240, 300, 360, 420, 480].map((y, i) => (
           <line key={i} x1="80" y1={y} x2={560 - i * 40} y2={y} stroke="#CF4520" strokeWidth="1" opacity={0.5 - i * 0.06} />

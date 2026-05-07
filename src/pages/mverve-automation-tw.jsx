@@ -33,7 +33,7 @@ const STACK = [
 function Hero() {
   return (
     <section className="relative pt-32 lg:pt-40 pb-20 lg:pb-28 overflow-hidden">
-      <motion.svg className="absolute -right-32 top-32 w-[500px] h-[500px] opacity-90 pointer-events-none" viewBox="0 0 640 640" fill="none">
+      <motion.svg className="absolute -right-24 sm:-right-32 top-32 w-[280px] h-[280px] sm:w-[500px] sm:h-[500px] opacity-30 sm:opacity-90 pointer-events-none" viewBox="0 0 640 640" fill="none">
         {[...Array(6)].map((_, i) => (
           <rect key={i} x={80 + i * 30} y={80 + i * 30} width={480 - i * 60} height={480 - i * 60} stroke="#CF4520" strokeWidth="1" opacity={0.5 - i * 0.07} />
         ))}

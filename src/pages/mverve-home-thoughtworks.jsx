@@ -57,7 +57,7 @@ function Hero() {
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
   return (
     <section ref={ref} className="relative pt-32 lg:pt-40 pb-20 lg:pb-28 overflow-hidden">
-      <motion.svg style={{ y }} className="absolute -right-40 top-24 lg:top-28 w-[520px] h-[520px] lg:w-[680px] lg:h-[680px] opacity-90 pointer-events-none" viewBox="0 0 640 640" fill="none">
+      <motion.svg style={{ y }} className="absolute -right-32 sm:-right-40 top-24 lg:top-28 w-[360px] h-[360px] sm:w-[520px] sm:h-[520px] lg:w-[680px] lg:h-[680px] opacity-30 sm:opacity-60 lg:opacity-90 pointer-events-none" viewBox="0 0 640 640" fill="none">
         {/* Static orbital rings */}
         <circle cx="320" cy="320" r="319" stroke="#CF4520" strokeWidth="1.2" />
         <circle cx="320" cy="320" r="240" stroke="#CF4520" strokeWidth="1" opacity="0.35" />

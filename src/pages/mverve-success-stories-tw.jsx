@@ -75,7 +75,7 @@ const STORIES = [
 function Hero() {
   return (
     <section className="relative pt-32 lg:pt-40 pb-20 lg:pb-28 overflow-hidden">
-      <motion.svg className="absolute -right-32 top-32 w-[500px] h-[500px] opacity-90 pointer-events-none" viewBox="0 0 640 640" fill="none">
+      <motion.svg className="absolute -right-24 sm:-right-32 top-32 w-[280px] h-[280px] sm:w-[500px] sm:h-[500px] opacity-30 sm:opacity-90 pointer-events-none" viewBox="0 0 640 640" fill="none">
         {[0, 80, 160, 240, 320, 400, 480].map((y, i) => (
           <line key={i} x1="80" y1={y + 80} x2={560 - i * 30} y2={y + 80} stroke="#CF4520" strokeWidth={i === 0 ? 14 : 1} strokeLinecap="round" opacity={i === 0 ? 1 : 0.4 - i * 0.04} />
         ))}

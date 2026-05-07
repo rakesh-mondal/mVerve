@@ -109,9 +109,10 @@ export function TopBar({ navigate }) {
   };
 
   return (
+    <>
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
-        scrolled || openGroup ? "bg-cream/95 backdrop-blur-md border-b border-rule" : "bg-cream/0"
+      className={`fixed top-0 left-0 right-0 z-[120] transition-colors duration-300 ${
+        scrolled || openGroup || mobileOpen ? "bg-cream/95 backdrop-blur-md border-b border-rule" : "bg-cream/0"
       }`}
       onMouseLeave={handleLeave}
     >
@@ -219,61 +220,66 @@ export function TopBar({ navigate }) {
         )}
       </AnimatePresence>
 
-      {/* Mobile drawer */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            data-lenis-prevent
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            style={{ position: "fixed", top: 96, left: 0, right: 0, bottom: 0, zIndex: 100 }}
-            className="xl:hidden bg-cream overflow-y-auto overscroll-contain"
-          >
-            <div className="px-6 py-8 pb-32 flex flex-col gap-2">
-              {NAV_GROUPS.map((g) => (
-                <div key={g.label} className="border-b border-rule py-4">
-                  <button
-                    type="button"
-                    onClick={() => go(g.feat.route)}
-                    className="w-full text-left font-display text-[32px] leading-tight font-light text-ink"
-                  >
-                    {g.label}
-                  </button>
-                  <div className="mt-3 flex flex-col">
-                    {g.items.map((it, i) => (
-                      <button
-                        key={i}
-                        type="button"
-                        onClick={() => go(it.route)}
-                        className="text-left text-[16px] text-ink-soft hover:text-coral py-2 pl-1"
-                      >
-                        — {it.label}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              ))}
-              <button
-                type="button"
-                onClick={() => go("careers")}
-                className="border-b border-rule py-5 text-left font-display text-[32px] font-light text-ink"
-              >
-                Careers
-              </button>
-              <button
-                type="button"
-                onClick={() => go("contact")}
-                className="mt-8 inline-flex items-center justify-center gap-2 bg-ink text-cream py-4 px-6 text-[15px] font-medium tracking-wide"
-              >
-                Let's innovate <ArrowUpRight size={16} />
-              </button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </header>
+
+    {/* Mobile drawer — rendered OUTSIDE header so backdrop-blur on header
+        does not create a containing block that clips the fixed-positioned drawer. */}
+    <AnimatePresence>
+      {mobileOpen && (
+        <motion.div
+          data-lenis-prevent
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.25 }}
+          style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, zIndex: 100 }}
+          className="xl:hidden bg-cream overflow-y-auto overscroll-contain"
+        >
+          {/* Spacer for the fixed header (96px on mobile / 112px on desktop) */}
+          <div className="h-24 lg:h-28" aria-hidden="true" />
+          <div className="px-6 py-8 pb-32 flex flex-col gap-2">
+            {NAV_GROUPS.map((g) => (
+              <div key={g.label} className="border-b border-rule py-4">
+                <button
+                  type="button"
+                  onClick={() => go(g.feat.route)}
+                  className="w-full text-left font-display text-[28px] sm:text-[32px] leading-tight font-light text-ink"
+                >
+                  {g.label}
+                </button>
+                <div className="mt-3 flex flex-col">
+                  {g.items.map((it, i) => (
+                    <button
+                      key={i}
+                      type="button"
+                      onClick={() => go(it.route)}
+                      className="text-left text-[16px] text-ink-soft hover:text-coral py-2 pl-1"
+                    >
+                      — {it.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            ))}
+            <button
+              type="button"
+              onClick={() => go("careers")}
+              className="border-b border-rule py-5 text-left font-display text-[28px] sm:text-[32px] font-light text-ink"
+            >
+              Careers
+            </button>
+            <button
+              type="button"
+              onClick={() => go("contact")}
+              className="mt-8 inline-flex items-center justify-center gap-2 bg-ink text-cream py-4 px-6 text-[15px] font-medium tracking-wide"
+            >
+              Let's innovate <ArrowUpRight size={16} />
+            </button>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+    </>
   );
 }
 
