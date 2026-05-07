@@ -385,7 +385,11 @@ export function Footer({ navigate }) {
         </div>
         <div className="border-t border-ink/20 pt-6 flex flex-wrap items-center justify-between gap-4 font-mono text-[10px] tracking-[0.2em] uppercase text-ink-muted">
           <div>© 2026 mVerve Technologies</div>
-          <div>Privacy · Terms · Cookies</div>
+          <div className="flex items-center gap-4">
+            <button onClick={() => navigate && navigate("privacy")} className="hover:text-coral transition-colors cursor-pointer">Privacy</button>
+            <span>·</span>
+            <button onClick={() => navigate && navigate("terms")} className="hover:text-coral transition-colors cursor-pointer">Terms</button>
+          </div>
         </div>
       </div>
     </footer>

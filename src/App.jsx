@@ -33,6 +33,8 @@ import { CleanTechContent } from "./pages/mverve-cleantech-tw";
 import { HealthcareContent } from "./pages/mverve-healthcare-tw";
 import { SuccessStoriesContent } from "./pages/mverve-success-stories-tw";
 import { WhitePapersContent } from "./pages/mverve-white-papers-tw";
+import { PrivacyContent } from "./pages/mverve-privacy-tw";
+import { TermsContent } from "./pages/mverve-terms-tw";
 
 /* ═══════════════════════════════════════════
    SHARED TOKENS
@@ -94,6 +96,8 @@ const ROUTES = [
 
   { id: "contact", hash: "contact", label: "Let's Innovate (Contact)", shortLabel: "Contact", icon: Send, color: T.green, Component: ContactContent, selfShell: true },
   { id: "careers", hash: "careers", label: "Careers", shortLabel: "Careers", icon: Sparkles, color: T.blue, Component: CareersContent, selfShell: true },
+  { id: "privacy", hash: "privacy", label: "Privacy Policy", shortLabel: "Privacy", icon: FileText, color: T.cyan, Component: PrivacyContent, selfShell: true },
+  { id: "terms", hash: "terms", label: "Terms of Use", shortLabel: "Terms", icon: FileText, color: T.cyan, Component: TermsContent, selfShell: true },
 ];
 
 /* ═══════════════════════════════════════════
