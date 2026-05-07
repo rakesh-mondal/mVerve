@@ -2,7 +2,9 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Mail, MapPin, Clock } from "lucide-react";
 import { PageShell } from "../components/SiteLayout";
-import { HiggsfieldPlaceholder } from "../components/Visuals";
+import { EditorialFigure } from "../components/Visuals";
+import bengaluruStudio from "../assets/careers-bengaluru-studio.png";
+import marylandOffice from "../assets/careers-maryland-office.png";
 
 const PROJECT_TYPES = [
   "AI & Innovation Lab",
@@ -177,18 +179,22 @@ function StudioPair() {
           </div>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <HiggsfieldPlaceholder
-            kind="image"
-            aspect="4/5"
-            brief="Editorial exterior shot of a Bengaluru engineering studio — boutique street, hand-painted signage, monsoon evening light, no people. Coral accent on the doorway."
-            caption="Bengaluru · India · IST"
-          />
-          <HiggsfieldPlaceholder
-            kind="image"
-            aspect="4/5"
-            brief="Editorial exterior shot of a Maryland office — brick warehouse converted, autumn afternoon, slight side-light, no people. Coral accent on the entry door."
-            caption="Maryland · USA · ET"
-          />
+          <EditorialFigure caption="Bengaluru · India · IST">
+            <img
+              src={bengaluruStudio}
+              alt="Bengaluru engineering studio interior — oak tables, exposed brick, engineers in middle distance, warm afternoon light"
+              className="w-full block"
+              style={{ aspectRatio: "4/5", objectFit: "cover" }}
+            />
+          </EditorialFigure>
+          <EditorialFigure caption="Maryland · USA · ET">
+            <img
+              src={marylandOffice}
+              alt="Maryland office interior — minimal architecture, autumn-lit windows, single engineer at a whiteboard"
+              className="w-full block"
+              style={{ aspectRatio: "4/5", objectFit: "cover" }}
+            />
+          </EditorialFigure>
         </div>
       </div>
     </section>
