@@ -4,7 +4,8 @@ import tailwindcss from '@tailwindcss/vite';
 
 const SITE = "https://mverve.com";
 
-// Per-route SEO. Mirrors the PAGES list in src/routes.jsx (kept in sync manually).
+// ─── Per-route SEO ─────────────────────────────────────────────
+// Mirrors the PAGES list in src/routes.jsx (kept in sync manually).
 const SEO_MAP = {
   "/": { title: "mVerve — AI-Native Engineering for the Industrial Future", desc: "mVerve builds AI-powered platforms, modernizes legacy infrastructure, and deploys carbon-aware technology so mid-market industrial enterprises can compete like the giants." },
   "/ai-lab": { title: "AI & Innovation Lab — mVerve", desc: "Where AI meets industrial intelligence. mVerve's R&D engine for custom LLMs, agentic workflows, and sustainable AI." },
@@ -34,8 +35,111 @@ const SEO_MAP = {
   "/terms": { title: "Terms of Use — mVerve", desc: "Terms and conditions that govern your access to and use of the mVerve Technologies website." },
 };
 
+// ─── Page taxonomy ──────────────────────────────────────────────
+// Drives BreadcrumbList and per-page schema type selection.
+const SERVICE_PAGES = new Set([
+  "/genai", "/automation", "/greenops", "/mvp-incubator", "/data-strategy",
+  "/cloud-native", "/modernization", "/platform", "/experience",
+  "/product-strategy", "/service-design", "/agile-pods", "/consulting",
+]);
+const INDUSTRY_PAGES = new Set(["/manufacturing", "/cleantech", "/healthcare"]);
+const COLLECTION_PAGES = new Set(["/white-papers", "/success-stories", "/tech-radar"]);
+const CONTACT_PAGES = new Set(["/contact", "/careers"]);
+
+// Breadcrumb parents (hub → sub).
+const BREADCRUMB_PARENT = {
+  "/genai": { label: "AI & Innovation Lab", path: "/ai-lab" },
+  "/automation": { label: "AI & Innovation Lab", path: "/ai-lab" },
+  "/greenops": { label: "AI & Innovation Lab", path: "/ai-lab" },
+  "/mvp-incubator": { label: "AI & Innovation Lab", path: "/ai-lab" },
+  "/data-strategy": { label: "AI & Innovation Lab", path: "/ai-lab" },
+  "/cloud-native": { label: "Expertise", path: "/expertise" },
+  "/modernization": { label: "Expertise", path: "/expertise" },
+  "/platform": { label: "Expertise", path: "/expertise" },
+  "/experience": { label: "Expertise", path: "/expertise" },
+  "/product-strategy": { label: "Expertise", path: "/expertise" },
+  "/service-design": { label: "Expertise", path: "/expertise" },
+  "/agile-pods": { label: "Expertise", path: "/expertise" },
+  "/consulting": { label: "Expertise", path: "/expertise" },
+  "/cleantech": { label: "Industries", path: "/manufacturing" },
+  "/healthcare": { label: "Industries", path: "/manufacturing" },
+  "/success-stories": { label: "Insights", path: "/tech-radar" },
+  "/white-papers": { label: "Insights", path: "/tech-radar" },
+};
+
 const escapeHtml = (s) =>
   String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+// ─── JSON-LD builders ───────────────────────────────────────────
+const orgLd = () => ({
+  "@type": "Organization",
+  "@id": `${SITE}/#organization`,
+  name: "mVerve Technologies",
+  url: SITE,
+  logo: { "@type": "ImageObject", url: `${SITE}/og-default.png` },
+  sameAs: [
+    "https://www.linkedin.com/company/mverve",
+    "https://twitter.com/mverve",
+  ],
+  description: SEO_MAP["/"].desc,
+});
+
+const websiteLd = () => ({
+  "@type": "WebSite",
+  "@id": `${SITE}/#website`,
+  url: SITE,
+  name: "mVerve",
+  publisher: { "@id": `${SITE}/#organization` },
+  inLanguage: "en",
+});
+
+const breadcrumbLd = (key, title) => {
+  const parent = BREADCRUMB_PARENT[key];
+  const items = [
+    { "@type": "ListItem", position: 1, name: "Home", item: SITE },
+  ];
+  let pos = 2;
+  if (parent) {
+    items.push({ "@type": "ListItem", position: pos++, name: parent.label, item: `${SITE}${parent.path}` });
+  }
+  items.push({ "@type": "ListItem", position: pos, name: title.replace(/ — mVerve$/, "").replace(/^mVerve — /, ""), item: `${SITE}${key}` });
+  return { "@type": "BreadcrumbList", itemListElement: items };
+};
+
+const pageTypeLd = (key, title, desc, url) => {
+  const cleanName = title.replace(/ — mVerve$/, "").replace(/^mVerve — /, "");
+  const base = {
+    "@id": `${url}#webpage`,
+    name: cleanName,
+    url,
+    description: desc,
+    isPartOf: { "@id": `${SITE}/#website` },
+    inLanguage: "en",
+  };
+  if (SERVICE_PAGES.has(key) || INDUSTRY_PAGES.has(key)) {
+    return {
+      "@type": "Service",
+      ...base,
+      provider: { "@id": `${SITE}/#organization` },
+      serviceType: cleanName,
+      areaServed: "Worldwide",
+    };
+  }
+  if (COLLECTION_PAGES.has(key)) {
+    return { "@type": "CollectionPage", ...base, about: { "@id": `${SITE}/#organization` } };
+  }
+  if (CONTACT_PAGES.has(key)) {
+    return { "@type": key === "/contact" ? "ContactPage" : "WebPage", ...base, about: { "@id": `${SITE}/#organization` } };
+  }
+  return { "@type": "WebPage", ...base };
+};
+
+const buildJsonLd = (key, title, desc, url) => {
+  const graph = [orgLd(), websiteLd(), pageTypeLd(key, title, desc, url)];
+  if (key !== "/") graph.push(breadcrumbLd(key, title));
+  const payload = { "@context": "https://schema.org", "@graph": graph };
+  return `<script type="application/ld+json">${JSON.stringify(payload)}</script>`;
+};
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
@@ -52,18 +156,26 @@ export default defineConfig({
       const url = key === "/" ? SITE : `${SITE}${key}`;
       const t = escapeHtml(meta.title);
       const d = escapeHtml(meta.desc);
-      const inject = `<title>${t}</title>
+      const ogImage = `${SITE}/og-default.png`;
+      const head = `<title>${t}</title>
   <meta name="description" content="${d}" />
   <link rel="canonical" href="${url}" />
-  <meta property="og:type" content="website" />
+  <meta property="og:type" content="${SERVICE_PAGES.has(key) || INDUSTRY_PAGES.has(key) ? "website" : "website"}" />
   <meta property="og:url" content="${url}" />
   <meta property="og:title" content="${t}" />
   <meta property="og:description" content="${d}" />
   <meta property="og:site_name" content="mVerve" />
+  <meta property="og:image" content="${ogImage}" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@mverve" />
   <meta name="twitter:title" content="${t}" />
-  <meta name="twitter:description" content="${d}" />`;
-      return renderedHTML.replace(/<title>[^<]*<\/title>/, inject);
+  <meta name="twitter:description" content="${d}" />
+  <meta name="twitter:image" content="${ogImage}" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  ${buildJsonLd(key, meta.title, meta.desc, url)}`;
+      return renderedHTML.replace(/<title>[^<]*<\/title>/, head);
     },
   },
 });
