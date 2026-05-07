@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { PageShell } from "../components/SiteLayout";
-import { HiggsfieldPlaceholder } from "../components/Visuals";
+import { EditorialFigure } from "../components/Visuals";
+import portraitImg from "../assets/consulting-portrait.png";
 
 const ENGAGEMENTS = [
   { tag: "Architecture Review", t: "Cold-eyes on a system you can no longer see.", d: "A two- to three-week deep read on a critical service or platform. Risks, debt, scaling cliffs, and the next three changes worth making — written for engineers, signed by principals." },
@@ -109,12 +110,14 @@ function Portrait() {
           </p>
         </div>
         <div className="col-span-12 lg:col-span-6 lg:col-start-7">
-          <HiggsfieldPlaceholder
-            kind="image"
-            aspect="4/5"
-            brief="Editorial environmental portrait — senior engineer at a desk with two monitors showing architecture diagrams, hands on a notebook, side-light from a window. Reading thoughtful, not posed. Half-face visible."
-            caption="Principal engineer · in advisory mode"
-          />
+          <EditorialFigure caption="Principal engineer · in advisory mode">
+            <img
+              src={portraitImg}
+              alt="Senior engineer at a desk with two monitors showing coral architecture diagrams, hands writing in a notebook, side-light from a window"
+              className="w-full block"
+              style={{ aspectRatio: "4/5", objectFit: "cover" }}
+            />
+          </EditorialFigure>
         </div>
       </div>
     </section>

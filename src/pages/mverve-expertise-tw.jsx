@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { PageShell } from "../components/SiteLayout";
-import { HiggsfieldPlaceholder } from "../components/Visuals";
+import { EditorialFigure } from "../components/Visuals";
+import craftImg from "../assets/expertise-craft.png";
 
 const DISCIPLINES = [
   { n: "01", t: "Cloud-Native Engineering", d: "Containers, microservices, infrastructure-as-code, and the discipline to keep them boring.", route: "cloud-native" },
@@ -122,12 +123,14 @@ function CraftShot() {
   return (
     <section className="px-0 lg:px-10 pb-4">
       <div className="max-w-[1440px] mx-auto">
-        <HiggsfieldPlaceholder
-          kind="image"
-          aspect="21/9"
-          brief="Editorial wide shot of a craft workshop — drafting tables, monitors, pinned architecture diagrams on a corkboard. Late-evening warm light, sense of considered work. No faces."
-          caption="The studio · Craft, considered"
-        />
+        <EditorialFigure caption="The studio · Craft, considered">
+          <img
+            src={craftImg}
+            alt="Engineering craft workshop — drafting table, monitor, corkboard with pinned architecture diagrams, books on a shelf, late-evening warm light"
+            className="w-full block"
+            style={{ aspectRatio: "21/9", objectFit: "cover" }}
+          />
+        </EditorialFigure>
       </div>
     </section>
   );
